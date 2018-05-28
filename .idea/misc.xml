@@ -5,5 +5,8 @@
     <sourceRoots>
       <file path="$PROJECT_DIR$" />
     </sourceRoots>
+    <libraryRoots>
+      <file path="$PROJECT_DIR$/CMSIS" />
+    </libraryRoots>
   </component>
 </project>

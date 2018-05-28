@@ -26,6 +26,7 @@
  * limitations under the License.
  */
 
+#include <CMSIS/Include/arm_math.h>
 #include "arm_math.h"
 
 void arm_radix2_butterfly_q15(

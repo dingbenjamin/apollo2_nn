@@ -744,9 +744,7 @@ extern "C"
   /*
    * @brief C custom defined intrinsic function for M3 and M0 processors
    */
-/* #if defined (ARM_MATH_CM3) || defined (ARM_MATH_CM0_FAMILY) */
-#if !defined (ARM_MATH_DSP)
-
+#if defined (ARM_MATH_CM3) || defined (ARM_MATH_CM0_FAMILY)
   /*
    * @brief C custom defined QADD8 for M3 and M0 processors
    */
@@ -1098,10 +1096,7 @@ extern "C"
     return ( ((x              ) & 0xFFFF0000UL) |
              ((y >> rightshift) & 0x0000FFFFUL)  );
   }
-#endif
-
-/* #endif // defined (ARM_MATH_CM3) || defined (ARM_MATH_CM0_FAMILY) */
-#endif /* !defined (ARM_MATH_DSP) */
+#endif // defined (ARM_MATH_CM3) || defined (ARM_MATH_CM0_FAMILY)
 
 
   /**
