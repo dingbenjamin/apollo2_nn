@@ -48,6 +48,8 @@ add_library(CMSISModule STATIC
         CMSIS/Include/mpu_armv7.h
         CMSIS/Include/tz_context.h)
 
+set_target_properties(CMSISModule PROPERTIES LINKER_LANGUAGE C)
+
 target_link_libraries(CMSISModule CMSIS/DSP_Lib/Lib/libarm_cortexM4lf_math.a)
 
 add_executable(apollo2_nn ${SOURCE_FILES})
