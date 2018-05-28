@@ -6,7 +6,7 @@
  */
 
 #include "performance.h"
-#include <ti/devices/msp432p4xx/driverlib/driverlib.h>
+
 
 const char hexDigits[] = "0123456789ABCDEF";
 uint32_t position = 0;
@@ -33,42 +33,42 @@ unsigned int calculateTime(pos, level)
         res = 16777216 - start + end;
     }
 
-    MAP_UART_transmitData(EUSCI_A0_BASE, hexDigits[(res >> 20) & 0xf]);
-    MAP_UART_transmitData(EUSCI_A0_BASE, hexDigits[(res >> 16) & 0xf]);
-    MAP_UART_transmitData(EUSCI_A0_BASE, hexDigits[(res >> 12) & 0xf]);
-    MAP_UART_transmitData(EUSCI_A0_BASE, hexDigits[(res >> 8) & 0xf]);
-    MAP_UART_transmitData(EUSCI_A0_BASE, hexDigits[(res >> 4) & 0xf]);
-    MAP_UART_transmitData(EUSCI_A0_BASE, hexDigits[res & 0xf]);
-
-    MAP_UART_transmitData(EUSCI_A0_BASE, ' ');
-
-    uint32_t i;
-    uint8_t command = (timedV[pos] & 0xF0000000) >> 28;
-    const char *commandptr = commands[command];
-    uint32_t length = commandLengths[command];
-    for (i = 0; i < length; ++i)
-    {
-        MAP_UART_transmitData(EUSCI_A0_BASE, commandptr[i]);
-    }
-
-    MAP_UART_transmitData(EUSCI_A0_BASE, '\r');
-    MAP_UART_transmitData(EUSCI_A0_BASE, '\n');
+//    MAP_UART_transmitData(EUSCI_A0_BASE, hexDigits[(res >> 20) & 0xf]);
+//    MAP_UART_transmitData(EUSCI_A0_BASE, hexDigits[(res >> 16) & 0xf]);
+//    MAP_UART_transmitData(EUSCI_A0_BASE, hexDigits[(res >> 12) & 0xf]);
+//    MAP_UART_transmitData(EUSCI_A0_BASE, hexDigits[(res >> 8) & 0xf]);
+//    MAP_UART_transmitData(EUSCI_A0_BASE, hexDigits[(res >> 4) & 0xf]);
+//    MAP_UART_transmitData(EUSCI_A0_BASE, hexDigits[res & 0xf]);
+//
+//    MAP_UART_transmitData(EUSCI_A0_BASE, ' ');
+//
+//    uint32_t i;
+//    uint8_t command = (timedV[pos] & 0xF0000000) >> 28;
+//    const char *commandptr = commands[command];
+//    uint32_t length = commandLengths[command];
+//    for (i = 0; i < length; ++i)
+//    {
+//        MAP_UART_transmitData(EUSCI_A0_BASE, commandptr[i]);
+//    }
+//
+//    MAP_UART_transmitData(EUSCI_A0_BASE, '\r');
+//    MAP_UART_transmitData(EUSCI_A0_BASE, '\n');
 
     return nextPos + 1;
 }
 
 void calculateTimes()
 {
-    MAP_UART_transmitData(EUSCI_A0_BASE, hexDigits[(position >> 28) & 0xf]);
-    MAP_UART_transmitData(EUSCI_A0_BASE, hexDigits[(position >> 24) & 0xf]);
-    MAP_UART_transmitData(EUSCI_A0_BASE, hexDigits[(position >> 20) & 0xf]);
-    MAP_UART_transmitData(EUSCI_A0_BASE, hexDigits[(position >> 16) & 0xf]);
-    MAP_UART_transmitData(EUSCI_A0_BASE, hexDigits[(position >> 12) & 0xf]);
-    MAP_UART_transmitData(EUSCI_A0_BASE, hexDigits[(position >> 8) & 0xf]);
-    MAP_UART_transmitData(EUSCI_A0_BASE, hexDigits[(position >> 4) & 0xf]);
-    MAP_UART_transmitData(EUSCI_A0_BASE, hexDigits[position & 0xf]);
-    MAP_UART_transmitData(EUSCI_A0_BASE, '\r');
-    MAP_UART_transmitData(EUSCI_A0_BASE, '\n');
+//    MAP_UART_transmitData(EUSCI_A0_BASE, hexDigits[(position >> 28) & 0xf]);
+//    MAP_UART_transmitData(EUSCI_A0_BASE, hexDigits[(position >> 24) & 0xf]);
+//    MAP_UART_transmitData(EUSCI_A0_BASE, hexDigits[(position >> 20) & 0xf]);
+//    MAP_UART_transmitData(EUSCI_A0_BASE, hexDigits[(position >> 16) & 0xf]);
+//    MAP_UART_transmitData(EUSCI_A0_BASE, hexDigits[(position >> 12) & 0xf]);
+//    MAP_UART_transmitData(EUSCI_A0_BASE, hexDigits[(position >> 8) & 0xf]);
+//    MAP_UART_transmitData(EUSCI_A0_BASE, hexDigits[(position >> 4) & 0xf]);
+//    MAP_UART_transmitData(EUSCI_A0_BASE, hexDigits[position & 0xf]);
+//    MAP_UART_transmitData(EUSCI_A0_BASE, '\r');
+//    MAP_UART_transmitData(EUSCI_A0_BASE, '\n');
 
     if(position > 8200) {
         while(1) {}

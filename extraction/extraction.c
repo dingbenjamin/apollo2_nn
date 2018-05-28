@@ -11,7 +11,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <ti/devices/msp432p4xx/driverlib/driverlib.h>
 
 #define max(a,b) \
    ({ __typeof__ (a) _a = (a); \

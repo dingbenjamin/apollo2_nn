@@ -12,8 +12,6 @@
 #include "fann_net.h"
 #include <arm_math.h>
 
-#include <ti/devices/msp432p4xx/driverlib/driverlib.h>
-
 fann_type neuron_values[NUM_NEURONS];
 
 // __attribute__((ramfunc))

@@ -35,24 +35,16 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * --/COPYRIGHT--*/
 /******************************************************************************
- * MSP432 Emotion Tracker v1.0
+ * MSP432 Emotion Tracker v1.0 Modified for Apollo2
  *
  * Description: tbd
  *
  * Author: Philipp MAYER, Michael PRITZ
+ *
+ * Modified By: Benjamin DING
  *******************************************************************************/
 
-/* DriverLib Includes */
-#include <sensors/s_ADC.h>
-#include <sensors/s_BLE.h>
-#include <sensors/s_BodyComm.h>
-#include <sensors/s_I2C.h>
-#include <sensors/s_SPI.h>
-#include <sensors/s_UART.h>
 #include <sensors/s_globals.h>
-#include <sensors/s_processing.h>
-#include <sensors/s_startup.h>
-#include <ti/devices/msp432p4xx/driverlib/driverlib.h>
 
 #define max(a, b)           \
   ({                        \
@@ -68,7 +60,6 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "config.h"
 #include "data.h"
 #include "extraction/extraction.h"
 #include "fann/fann.h"
