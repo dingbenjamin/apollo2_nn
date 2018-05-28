@@ -34,6 +34,7 @@
  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * --/COPYRIGHT--*/
+
 /******************************************************************************
  * MSP432 Emotion Tracker v1.0 Modified for Apollo2
  *
@@ -45,15 +46,6 @@
  *******************************************************************************/
 
 #include <sensors/s_globals.h>
-
-#define max(a, b)           \
-  ({                        \
-    __typeof__(a) _a = (a); \
-    __typeof__(b) _b = (b); \
-    _a > _b ? _a : _b;      \
-  })
-
-/* Standard Includes */
 #include <arm_math.h>
 #include <math.h>
 #include <stdbool.h>
@@ -65,65 +57,12 @@
 #include "fann/fann.h"
 #include "fann/test_data.h"
 
-/* global variables */
-int cnt = 0;
-int cnt_aud = 0;
-int cnt_gsr = 0;
-int cnt_mot = 0;
-uint32_t smclk;
-uint32_t mclk;
-uint32_t aclk;
-uint32_t I2C_xferIndex;
-volatile uint16_t T32_time;
-volatile uint32_t T32_BCOMM;
-volatile uint8_t BodyComm;
-volatile char BLE_CMD[BLE_CMD_SIZE];
-volatile uint8_t BLE_CMD_N;
-volatile uint8_t I2C_TX[I2C_TX_BYTES];
-volatile uint8_t I2C_RX[I2C_RX_BYTES];
-volatile uint8_t I2C_recBytes;
-volatile uint8_t SPI_RX_ECG[SPI_RX_BYTES];
-volatile uint8_t SPI_RX_FRAM[SPI_RX_BYTES];
-volatile uint8_t SPI_recBytesFRAM;
-volatile uint8_t SPI_recBytesECG;
-volatile uint16_t ADC_result[ADC_B_SIZE];
-volatile uint32_t ECG_cnt;
-// flags
-volatile bool I2C_stopSent;
-volatile bool ECG_DRDY;
-volatile bool ADC_DRDY;
-volatile bool SENS_STREAM;
-volatile bool BLE_REC;
-volatile bool FANN_CALC;
-// FANN related
-float FANN_AudioData[(12 * 12)] = {0};
-float FANN_MotX[12] = {0};
-float FANN_MotY[12] = {0};
-float FANN_MotZ[12] = {0};
-float meanX = 0;
-float meanY = 0;
-float meanZ = 0;
-float meanA = 0;
-float varX = 0;
-float varY = 0;
-float varZ = 0;
-float varA = 0;
-
-uint8_t BLE_TX[BLE_TX_SIZE] = {0};
-uint8_t MotionData[12] = {0};
-uint8_t MagData[6] = {0};
-uint16_t GSRData[8] = {0};
-uint32_t GSRtemp = 0;
-uint8_t Status[22] = {0};
-uint8_t Temp[2] = {0};
-uint16_t i = 0;
-uint8_t PKG_sent = 0;
-uint8_t hi = 0;
-uint8_t lo = 0;
-uint32_t Loff = 0;
-int16_t MOT_temp = 0;
-uint16_t mtime = 0;
-int feat[8];
+#define max(a, b)           \
+  ({                        \
+    __typeof__(a) _a = (a); \
+    __typeof__(b) _b = (b); \
+    _a > _b ? _a : _b;      \
+  })
 
 int max_index(float *a, int n) {
   if (n <= 0) return -1;
