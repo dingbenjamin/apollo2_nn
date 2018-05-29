@@ -1,0 +1,14 @@
+.\objects\fann.o: fann\fann.c
+.\objects\fann.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\fann.o: fann\fann_conf.h
+.\objects\fann.o: fann\fann.h
+.\objects\fann.o: fann\fann_structs.h
+.\objects\fann.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\objects\fann.o: fann\fann_net.h
+.\objects\fann.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\arm_math.h
+.\objects\fann.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\core_cm4.h
+.\objects\fann.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\fann.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\cmsis_version.h
+.\objects\fann.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\cmsis_compiler.h
+.\objects\fann.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\cmsis_armcc.h
+.\objects\fann.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

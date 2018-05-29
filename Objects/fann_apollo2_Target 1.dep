@@ -1,0 +1,40 @@
+Dependencies for Project 'fann_apollo2', Target 'Target 1': (DO NOT MODIFY !)
+F (.\main.c)(0x5B0D2101)(--gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\AmbiqMicro\Apollo_DFP\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -D_RTE_ -DAPOLLO2_1024 -DARM_MATH_CM4 -D__FPU_PRESENT="1"-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (.\performance.c)(0x5B0D1FDA)(--gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\AmbiqMicro\Apollo_DFP\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -D_RTE_ -DAPOLLO2_1024 -DARM_MATH_CM4 -D__FPU_PRESENT="1"-o .\objects\performance.o --omf_browse .\objects\performance.crf --depend .\objects\performance.d)
+I (performance.h)(0x59ECE6AC)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599F218E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599F218E)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599F218C)
+F (.\fann\fann.c)(0x5B0D1FDA)(--gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\AmbiqMicro\Apollo_DFP\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -D_RTE_ -DAPOLLO2_1024 -DARM_MATH_CM4 -D__FPU_PRESENT="1"-o .\objects\fann.o --omf_browse .\objects\fann.crf --depend .\objects\fann.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599F218C)
+I (fann\fann_conf.h)(0x59ECE6AC)
+I (fann\fann.h)(0x59ECE6AC)
+I (fann\fann_structs.h)(0x59ECE6AC)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x599F218E)
+I (fann\fann_net.h)(0x59ECE6AC)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\arm_math.h)(0x5A8E7442)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\core_cm4.h)(0x5A8E7442)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599F218E)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\cmsis_version.h)(0x5A55EA42)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\cmsis_compiler.h)(0x5A8E7442)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\cmsis_armcc.h)(0x5A8E7442)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599F218C)
+F (.\extraction\extraction.c)(0x5B0D1FDA)(--gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\AmbiqMicro\Apollo_DFP\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -D_RTE_ -DAPOLLO2_1024 -DARM_MATH_CM4 -D__FPU_PRESENT="1"-o .\objects\extraction.o --omf_browse .\objects\extraction.crf --depend .\objects\extraction.d)
+I (extraction\extraction.h)(0x59ECE6AC)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599F218E)
+I (extraction\loop.h)(0x59ECE6AC)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599F218E)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x599F218E)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\arm_math.h)(0x5A8E7442)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\core_cm4.h)(0x5A8E7442)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\cmsis_version.h)(0x5A55EA42)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\cmsis_compiler.h)(0x5A8E7442)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\cmsis_armcc.h)(0x5A8E7442)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599F218C)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599F218C)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599F218C)
+F (.\extraction\loop.c)(0x59ECE6AC)(--gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\AmbiqMicro\Apollo_DFP\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="525" -D_RTE_ -DAPOLLO2_1024 -DARM_MATH_CM4 -D__FPU_PRESENT="1"-o .\objects\loop.o --omf_browse .\objects\loop.crf --depend .\objects\loop.d)
+I (extraction\loop.h)(0x59ECE6AC)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599F218E)
+F (.\sensors\s_globals.h)(0x59ECE6AC)()
+F (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Lib\ARM\arm_cortexM4lf_math.lib)(0x5A606D88)()
