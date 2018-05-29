@@ -77,12 +77,9 @@ int max_index(float *a, int n) {
 }
 
 void test(void) {
-//  init_sys();
-
   int t;
   int corr;
   float *res;
-//  GPIO_setOutputHighOnPin(GPIO_PORT_P6, GPIO_PIN0);
   for (t = 0; t < 800; t = t + 8) {
     res = fann_run(&test_data_input[t]);
 
@@ -90,13 +87,8 @@ void test(void) {
       ++corr;
     }
   }
-//  GPIO_setOutputLowOnPin(GPIO_PORT_P6, GPIO_PIN0);
 
   volatile float acc = corr / 100.0f;
-
-//  while (1) {
-//    MAP_PCM_gotoLPM4();
-//  }
 }
 
 int main(void) { test(); }
