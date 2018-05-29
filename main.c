@@ -45,7 +45,6 @@
  * Modified By: Benjamin DING
  *******************************************************************************/
 
-#include <sensors/s_globals.h>
 #include <arm_math.h>
 #include <math.h>
 #include <stdbool.h>
