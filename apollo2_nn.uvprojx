@@ -7,7 +7,7 @@
 
   <Targets>
     <Target>
-      <TargetName>Target 1</TargetName>
+      <TargetName>apollo2_nn</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
@@ -379,7 +379,7 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>Source Group 1</GroupName>
+          <GroupName>src</GroupName>
           <Files>
             <File>
               <FileName>data.h</FileName>
@@ -474,13 +474,13 @@
       <component Cclass="CMSIS" Cgroup="DSP" Cvendor="ARM" Cversion="1.5.2" condition="CMSIS DSP">
         <package name="CMSIS" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="ARM" version="5.3.0"/>
         <targetInfos>
-          <targetInfo name="Target 1"/>
+          <targetInfo name="apollo2_nn"/>
         </targetInfos>
       </component>
       <component Cclass="Device" Cgroup="Startup" Cvendor="AmbiqMicro" Cversion="1.0.0" condition="Apollo2 CMSIS Device">
         <package name="Apollo_DFP" schemaVersion="1.3" url="http://s3.asia.ambiqmicro.com/pack/" vendor="AmbiqMicro" version="1.0.0"/>
         <targetInfos>
-          <targetInfo name="Target 1"/>
+          <targetInfo name="apollo2_nn"/>
         </targetInfos>
       </component>
     </components>
@@ -490,7 +490,7 @@
         <component Cclass="Device" Cgroup="Startup" Cvendor="AmbiqMicro" Cversion="1.0.0" condition="Apollo2 CMSIS Device"/>
         <package name="Apollo_DFP" schemaVersion="1.3" url="http://s3.asia.ambiqmicro.com/pack/" vendor="AmbiqMicro" version="1.0.0"/>
         <targetInfos>
-          <targetInfo name="Target 1"/>
+          <targetInfo name="apollo2_nn"/>
         </targetInfos>
       </file>
       <file attr="config" category="source" condition="Compiler ARMCC" name="Device\Source\system_apollo2.c" version="1.0.0">
@@ -498,7 +498,7 @@
         <component Cclass="Device" Cgroup="Startup" Cvendor="AmbiqMicro" Cversion="1.0.0" condition="Apollo2 CMSIS Device"/>
         <package name="Apollo_DFP" schemaVersion="1.3" url="http://s3.asia.ambiqmicro.com/pack/" vendor="AmbiqMicro" version="1.0.0"/>
         <targetInfos>
-          <targetInfo name="Target 1"/>
+          <targetInfo name="apollo2_nn"/>
         </targetInfos>
       </file>
       <file attr="config" category="header" name="Device\Include\system_apollo2.h" version="1.0.0">
@@ -506,7 +506,7 @@
         <component Cclass="Device" Cgroup="Startup" Cvendor="AmbiqMicro" Cversion="1.0.0" condition="Apollo2 CMSIS Device"/>
         <package name="Apollo_DFP" schemaVersion="1.3" url="http://s3.asia.ambiqmicro.com/pack/" vendor="AmbiqMicro" version="1.0.0"/>
         <targetInfos>
-          <targetInfo name="Target 1"/>
+          <targetInfo name="apollo2_nn"/>
         </targetInfos>
       </file>
     </files>
