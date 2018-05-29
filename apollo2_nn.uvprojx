@@ -323,7 +323,7 @@
             <wLevel>2</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
-            <uC99>1</uC99>
+            <uC99>0</uC99>
             <uGnu>1</uGnu>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define>ARM_MATH_CM4 __FPU_PRESENT=1</Define>
               <Undefine></Undefine>
-              <IncludePath></IncludePath>
+              <IncludePath>C:\AmbiqSuite-Rel1.2.12\boards\apollo2_evb\bsp;C:\AmbiqSuite-Rel1.2.12\utils;C:\AmbiqSuite-Rel1.2.12\devices;C:\AmbiqSuite-Rel1.2.12\mcu\apollo2;C:\AmbiqSuite-Rel1.2.12\</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
