@@ -49,10 +49,10 @@ void test(void) {
     }
   }
 
-  volatile float acc = corr / NUM_SAMPLES;
+  volatile float acc = 100.0 * corr / (float)NUM_SAMPLES;
 	
 	am_bsp_debug_printf_enable();
-	am_util_stdio_printf("Accuracy: %.2f", acc);
+	am_util_stdio_printf("Accuracy: %.4f%%\n", acc);
 	am_bsp_debug_printf_disable();
 }
 
