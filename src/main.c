@@ -1,5 +1,5 @@
 /******************************************************************************
- * FANN Implementation on Apollo2 MCU Tests
+ * FANN Implementation on Apollo2 MCU
  *
  * Author: Philipp MAYER, Michael PRITZ, Ferdinand VON HAGEN
  *
@@ -12,6 +12,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "data.h"
 #include "extraction/extraction.h"
 #include "fann/fann.h"
 #include "fann/test_data.h"
@@ -20,7 +21,7 @@
 #include "am_bsp.h"
 #include "am_util.h"
 
-#define NUM_SAMPLES 426
+#define NUM_SAMPLES 100
 #define NUM_FEATURES 8
 #define NUM_CLASSES 3
 
@@ -48,7 +49,7 @@ void test(void) {
     }
   }
 
-  volatile float acc = corr / (float)NUM_SAMPLES;
+  volatile float acc = corr / NUM_SAMPLES;
 	
 	am_bsp_debug_printf_enable();
 	am_util_stdio_printf("Accuracy: %.2f", acc);
@@ -96,7 +97,7 @@ void setup(void) {
 	//
 	am_util_stdio_terminal_clear();
 	am_util_stdio_printf("apollo2_nn\n");
-	am_util_stdio_printf("\tPerforms tests of FANN library on target platform\n\n");\
+	am_util_stdio_printf("\tPerforms tests of FANN library on target platform\n");\
 	
 	//
 	// We are done printing. Disable debug printf messages on ITM.
