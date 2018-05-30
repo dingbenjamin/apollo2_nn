@@ -7,10 +7,9 @@
 
   <Targets>
     <Target>
-      <TargetName>apollo2_nn</TargetName>
+      <TargetName>libam_bsp</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -18,12 +17,12 @@
           <Vendor>Ambiq Micro</Vendor>
           <PackID>AmbiqMicro.Apollo_DFP.1.0.0</PackID>
           <PackURL>http://s3.asia.ambiqmicro.com/pack/</PackURL>
-          <Cpu>IRAM(0x10000000,0x40000) IROM(0x00000000,0x100000) CPUTYPE("Cortex-M4") FPU2 CLOCK(12000000) ELITTLE</Cpu>
+          <Cpu>IROM(0x00000000,0x100000) IRAM(0x10000000,0x40000) CPUTYPE("Cortex-M4") FPU2 CLOCK(24000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
-          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD10000000 -FC4000 -FN1 -FF0Apollo2 -FS00 -FL010000 -FP0($$Device:AMAPH1KK-KBR$Flash\Apollo2.FLM))</FlashDriverDll>
+          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD10000000 -FC4000 -FN1 -FF0Apollo -FS00 -FL010000 -FP0($$Device:AMAPH1KK-KBR$Flash\Apollo2.FLM))</FlashDriverDll>
           <DeviceId>0</DeviceId>
-          <RegisterFile>$$Device:AMAPH1KK-KBR$Device\Include\apollo2.h</RegisterFile>
+          <RegisterFile></RegisterFile>
           <MemoryEnv></MemoryEnv>
           <Cmp></Cmp>
           <Asm></Asm>
@@ -33,14 +32,14 @@
           <SLE66CMisc></SLE66CMisc>
           <SLE66AMisc></SLE66AMisc>
           <SLE66LinkerMisc></SLE66LinkerMisc>
-          <SFDFile>$$Device:AMAPH1KK-KBR$SVD\apollo2.svd</SFDFile>
+          <SFDFile>$$Device:AMAPH1KK-KBR$SVD\Apollo2.svd</SFDFile>
           <bCustSvd>0</bCustSvd>
           <UseEnv>0</UseEnv>
           <BinPath></BinPath>
           <IncludePath></IncludePath>
           <LibPath></LibPath>
-          <RegisterFilePath></RegisterFilePath>
-          <DBRegisterFilePath></DBRegisterFilePath>
+          <RegisterFilePath>1024 BGA$Device\Include\Apollo2.h\</RegisterFilePath>
+          <DBRegisterFilePath>1024 BGA$Device\Include\Apollo2.h\</DBRegisterFilePath>
           <TargetStatus>
             <Error>0</Error>
             <ExitCodeStop>0</ExitCodeStop>
@@ -48,12 +47,12 @@
             <NotGenerated>0</NotGenerated>
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
-          <OutputDirectory>.\Objects\</OutputDirectory>
-          <OutputName>apollo2_nn</OutputName>
-          <CreateExecutable>1</CreateExecutable>
-          <CreateLib>0</CreateLib>
-          <CreateHexFile>1</CreateHexFile>
-          <DebugInformation>1</DebugInformation>
+          <OutputDirectory>.\bin\</OutputDirectory>
+          <OutputName>libam_bsp</OutputName>
+          <CreateExecutable>0</CreateExecutable>
+          <CreateLib>1</CreateLib>
+          <CreateHexFile>0</CreateHexFile>
+          <DebugInformation>0</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
           <ListingPath>.\Listings\</ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
@@ -82,8 +81,8 @@
           <AfterMake>
             <RunUserProg1>0</RunUserProg1>
             <RunUserProg2>0</RunUserProg2>
-            <UserProg1Name></UserProg1Name>
-            <UserProg2Name></UserProg2Name>
+            <UserProg1Name>fromelf --bin --output bin\libam_bsp.bin bin\libam_bsp.axf</UserProg1Name>
+            <UserProg2Name>fromelf -cedrst --output bin\libam_bsp.txt bin\libam_bsp.axf</UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
             <nStopA1X>0</nStopA1X>
@@ -138,7 +137,7 @@
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3>"" ()</Flash3>
+          <Flash3></Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
           <pFcarmGrp></pFcarmGrp>
@@ -274,7 +273,7 @@
               <OCR_RVCT4>
                 <Type>1</Type>
                 <StartAddress>0x0</StartAddress>
-                <Size>0x100000</Size>
+                <Size>0x80000</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
                 <Type>1</Type>
@@ -311,8 +310,8 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>1</Optim>
-            <oTime>0</oTime>
+            <Optim>4</Optim>
+            <oTime>1</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
             <Strict>0</Strict>
@@ -324,7 +323,7 @@
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
-            <uGnu>1</uGnu>
+            <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
             <v6LangP>1</v6LangP>
@@ -335,9 +334,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>ARM_MATH_CM4 __FPU_PRESENT=1 AM_PACKAGE_BGA AM_PART_APOLLO2 keil</Define>
+              <Define>AM_PACKAGE_BGA AM_PART_APOLLO2 keil</Define>
               <Undefine></Undefine>
-              <IncludePath>.\sdk;.\sdk\apollo2;.\sdk\bsp;.\sdk\devices;.\sdk\utils</IncludePath>
+              <IncludePath>../../../../mcu/apollo2;../../../../devices</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -365,13 +364,13 @@
             <noStLib>0</noStLib>
             <RepFail>1</RepFail>
             <useFile>0</useFile>
-            <TextAddressRange>0x00000000</TextAddressRange>
+            <TextAddressRange>0x0</TextAddressRange>
             <DataAddressRange>0x10000000</DataAddressRange>
             <pXoBase></pXoBase>
             <ScatterFile></ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
-            <Misc>./sdk/apollo2/hal/keil/bin/libam_hal.lib(am_hal_global.o) --keep=am_hal_global.o(.data)</Misc>
+            <Misc></Misc>
             <LinkerInputFile></LinkerInputFile>
             <DisabledWarnings></DisabledWarnings>
           </LDads>
@@ -379,135 +378,14 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>src</GroupName>
+          <GroupName>source_files</GroupName>
           <Files>
             <File>
-              <FileName>s_globals.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\sensors\s_globals.h</FilePath>
-            </File>
-            <File>
-              <FileName>data.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\data.h</FilePath>
-            </File>
-            <File>
-              <FileName>main.c</FileName>
+              <FileName>am_bsp.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\src\main.c</FilePath>
-            </File>
-            <File>
-              <FileName>performance.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\performance.c</FilePath>
-            </File>
-            <File>
-              <FileName>performance.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\performance.h</FilePath>
-            </File>
-            <File>
-              <FileName>extraction.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\extraction\extraction.c</FilePath>
-            </File>
-            <File>
-              <FileName>extraction.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\extraction\extraction.h</FilePath>
-            </File>
-            <File>
-              <FileName>loop.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\extraction\loop.c</FilePath>
-            </File>
-            <File>
-              <FileName>loop.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\extraction\loop.h</FilePath>
-            </File>
-            <File>
-              <FileName>fann.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\fann\fann.c</FilePath>
-            </File>
-            <File>
-              <FileName>fann.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\fann\fann.h</FilePath>
-            </File>
-            <File>
-              <FileName>fann_conf.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\fann\fann_conf.h</FilePath>
-            </File>
-            <File>
-              <FileName>fann_net.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\fann\fann_net.h</FilePath>
-            </File>
-            <File>
-              <FileName>fann_structs.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\fann\fann_structs.h</FilePath>
-            </File>
-            <File>
-              <FileName>test_data.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\fann\test_data.h</FilePath>
+              <FilePath>../am_bsp.c</FilePath>
             </File>
           </Files>
-        </Group>
-        <Group>
-          <GroupName>utils</GroupName>
-          <Files>
-            <File>
-              <FileName>am_util_delay.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\sdk\utils\am_util_delay.c</FilePath>
-            </File>
-            <File>
-              <FileName>am_util_faultisr.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\sdk\utils\am_util_faultisr.c</FilePath>
-            </File>
-            <File>
-              <FileName>am_util_stdio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\sdk\utils\am_util_stdio.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>devices</GroupName>
-          <Files>
-            <File>
-              <FileName>am_devices_led.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\sdk\devices\am_devices_led.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>lib</GroupName>
-          <Files>
-            <File>
-              <FileName>libam_bsp.lib</FileName>
-              <FileType>4</FileType>
-              <FilePath>.\sdk\bsp\keil\bin\libam_bsp.lib</FilePath>
-            </File>
-            <File>
-              <FileName>libam_hal.lib</FileName>
-              <FileType>4</FileType>
-              <FilePath>.\sdk\apollo2\hal\keil\bin\libam_hal.lib</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>::CMSIS</GroupName>
-        </Group>
-        <Group>
-          <GroupName>::Device</GroupName>
         </Group>
       </Groups>
     </Target>
@@ -515,46 +393,8 @@
 
   <RTE>
     <apis/>
-    <components>
-      <component Cclass="CMSIS" Cgroup="DSP" Cvendor="ARM" Cversion="1.5.2" condition="CMSIS DSP">
-        <package name="CMSIS" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="ARM" version="5.3.0"/>
-        <targetInfos>
-          <targetInfo name="apollo2_nn"/>
-        </targetInfos>
-      </component>
-      <component Cclass="Device" Cgroup="Startup" Cvendor="AmbiqMicro" Cversion="1.0.0" condition="Apollo2 CMSIS Device">
-        <package name="Apollo_DFP" schemaVersion="1.3" url="http://s3.asia.ambiqmicro.com/pack/" vendor="AmbiqMicro" version="1.0.0"/>
-        <targetInfos>
-          <targetInfo name="apollo2_nn"/>
-        </targetInfos>
-      </component>
-    </components>
-    <files>
-      <file attr="config" category="source" condition="Compiler ARMCC" name="Device\Source\startup_apollo2.s" version="1.0.0">
-        <instance index="0">RTE\Device\AMAPH1KK-KBR\startup_apollo2.s</instance>
-        <component Cclass="Device" Cgroup="Startup" Cvendor="AmbiqMicro" Cversion="1.0.0" condition="Apollo2 CMSIS Device"/>
-        <package name="Apollo_DFP" schemaVersion="1.3" url="http://s3.asia.ambiqmicro.com/pack/" vendor="AmbiqMicro" version="1.0.0"/>
-        <targetInfos>
-          <targetInfo name="apollo2_nn"/>
-        </targetInfos>
-      </file>
-      <file attr="config" category="source" condition="Compiler ARMCC" name="Device\Source\system_apollo2.c" version="1.0.0">
-        <instance index="0">RTE\Device\AMAPH1KK-KBR\system_apollo2.c</instance>
-        <component Cclass="Device" Cgroup="Startup" Cvendor="AmbiqMicro" Cversion="1.0.0" condition="Apollo2 CMSIS Device"/>
-        <package name="Apollo_DFP" schemaVersion="1.3" url="http://s3.asia.ambiqmicro.com/pack/" vendor="AmbiqMicro" version="1.0.0"/>
-        <targetInfos>
-          <targetInfo name="apollo2_nn"/>
-        </targetInfos>
-      </file>
-      <file attr="config" category="header" name="Device\Include\system_apollo2.h" version="1.0.0">
-        <instance index="0">RTE\Device\AMAPH1KK-KBR\system_apollo2.h</instance>
-        <component Cclass="Device" Cgroup="Startup" Cvendor="AmbiqMicro" Cversion="1.0.0" condition="Apollo2 CMSIS Device"/>
-        <package name="Apollo_DFP" schemaVersion="1.3" url="http://s3.asia.ambiqmicro.com/pack/" vendor="AmbiqMicro" version="1.0.0"/>
-        <targetInfos>
-          <targetInfo name="apollo2_nn"/>
-        </targetInfos>
-      </file>
-    </files>
+    <components/>
+    <files/>
   </RTE>
 
 </Project>
