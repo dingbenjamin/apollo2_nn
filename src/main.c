@@ -56,6 +56,9 @@
 #include "fann/fann.h"
 #include "fann/test_data.h"
 #include "apollo1.h"
+#include "am_mcu_apollo.h"
+#include "am_bsp.h"
+#include "am_util.h"
 
 #define max(a, b)           \
   ({                        \
@@ -63,60 +66,7 @@
     __typeof__(b) _b = (b); \
     _a > _b ? _a : _b;      \
   })
-	
-#define EVB_LED0        34
-#define EVB_LED1        33
-#define EVB_LED2        28
-#define EVB_LED3        26
-#define EVB_LED4        25
 
-//*****************************************************************************
-//
-// Set or clear an LED.
-// The LEDs on the EVB are common anode (anodes tied high).
-// Therefore, they are turned on when the GPIO is cleared.
-// Likewise, they are turned off when the GPIO is set.
-//
-//*****************************************************************************
-static void
-LED_on(uint32_t ui32LED, bool bOn)
-{
-    uint32_t ui32Mask;
-
-    if ( ui32LED <= 31 )
-    {
-        ui32Mask = 0x01 << (ui32LED - 0);
-
-        if ( bOn )
-        {
-            GPIO->WTCA = ui32Mask;
-        }
-        else
-        {
-            GPIO->WTSA = ui32Mask;
-        }
-    }
-    else if ( ui32LED <= 49 )
-    {
-        ui32Mask = 0x01 << (ui32LED - 32);
-
-        if ( bOn )
-        {
-            GPIO->WTCB = ui32Mask;
-        }
-        else
-        {
-            GPIO->WTSB = ui32Mask;
-        }
-    }
-    else
-    {
-        // ERROR.
-        while (1);
-    }
-
-} // LED_on()
-	
 int max_index(float *a, int n) {
   if (n <= 0) return -1;
   int i, max_i = 0;
@@ -145,8 +95,67 @@ void test(void) {
   volatile float acc = corr / 100.0f;
 }
 
+void setup(void) {
+	//
+	// Set the clock frequency.
+	//
+	am_hal_clkgen_sysclk_select(AM_HAL_CLKGEN_SYSCLK_MAX);
+
+	//
+	// Set the default cache configuration
+	//
+	am_hal_cachectrl_enable(&am_hal_cachectrl_defaults);
+
+	//
+	// Configure the board for low power operation.
+	//
+	am_bsp_low_power_init();
+
+	//
+	// Initialize the printf interface for ITM/SWO output.
+	//
+	am_util_stdio_printf_init((am_util_stdio_print_char_t) am_bsp_itm_string_print);
+
+	//
+	// Initialize the SWO GPIO pin
+	//
+	am_bsp_pin_enable(ITM_SWO);
+
+	//
+	// Enable the ITM.
+	//
+	am_hal_itm_enable();
+
+	//
+	// Enable debug printf messages using ITM on SWO pin
+	//
+	am_bsp_debug_printf_enable();
+
+	//
+	// Clear the terminal and print the banner.
+	//
+	am_util_stdio_terminal_clear();
+	am_util_stdio_printf("apollo2_nn\n");
+	am_util_stdio_printf("\tPerforms tests of FANN library on target platform\n");\
+	
+	//
+	// We are done printing. Disable debug printf messages on ITM.
+	//
+	am_bsp_debug_printf_disable();
+	
+	//
+	// Clear the LED.
+	//
+	am_devices_led_array_init(am_bsp_psLEDs, AM_BSP_NUM_LEDS);
+
+	//
+	// Enable the LFRC.
+	//
+	am_hal_clkgen_osc_start(AM_HAL_CLKGEN_OSC_LFRC);
+}
+	
+
 int main(void) { 
-	test();
 	while(1) {
 		// Do nothing
 	}
