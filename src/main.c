@@ -56,6 +56,10 @@ void test(void) {
   }
 
   volatile float acc = corr / 100.0f;
+	
+	am_bsp_debug_printf_enable();
+	am_util_stdio_printf("Accuracy: %.2lf", acc);
+	am_bsp_debug_printf_disable();
 }
 
 void setup(void) {
@@ -119,6 +123,8 @@ void setup(void) {
 	
 
 int main(void) { 
+	setup();
+	test();
 	while(1) {
 		// Do nothing
 	}
