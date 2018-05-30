@@ -1,8 +1,6 @@
 /******************************************************************************
  * FANN Implementation on Apollo2 MCU
  *
- * Description: tbd
- *
  * Author: Philipp MAYER, Michael PRITZ, Ferdinand VON HAGEN
  *
  * Modified By: Benjamin DING
@@ -23,12 +21,9 @@
 #include "am_bsp.h"
 #include "am_util.h"
 
-#define max(a, b)           \
-  ({                        \
-    __typeof__(a) _a = (a); \
-    __typeof__(b) _b = (b); \
-    _a > _b ? _a : _b;      \
-  })
+#define NUM_SAMPLES 100
+#define NUM_FEATURES 8
+#define NUM_CLASSES 3
 
 int max_index(float *a, int n) {
   if (n <= 0) return -1;
@@ -45,20 +40,19 @@ int max_index(float *a, int n) {
 
 void test(void) {
   int t;
-  int corr;
+  int corr = 0;
   float *res;
-  for (t = 0; t < 800; t = t + 8) {
-    res = fann_run(&test_data_input[t]);
-
-    if (max_index(res, 3) == test_data_output[t / 8]) {
+  for (t = 0; t < NUM_SAMPLES; t++) {
+    res = fann_run(&test_data_input[t * NUM_FEATURES]);
+    if (max_index(res, NUM_CLASSES) == test_data_output[t]) {
       ++corr;
     }
   }
 
-  volatile float acc = corr / 100.0f;
+  volatile float acc = corr / NUM_SAMPLES;
 	
 	am_bsp_debug_printf_enable();
-	am_util_stdio_printf("Accuracy: %.2lf", acc);
+	am_util_stdio_printf("Accuracy: %.2f", acc);
 	am_bsp_debug_printf_disable();
 }
 

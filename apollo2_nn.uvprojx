@@ -382,11 +382,6 @@
           <GroupName>src</GroupName>
           <Files>
             <File>
-              <FileName>s_globals.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\sensors\s_globals.h</FilePath>
-            </File>
-            <File>
               <FileName>data.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\data.h</FilePath>
