@@ -17,12 +17,15 @@
 #include "fann/test_data.h"
 #include "apollo1.h"
 #include "am_mcu_apollo.h"
+#include "am_hal_gpio.h"
 #include "am_bsp.h"
 #include "am_util.h"
 
 #define NUM_SAMPLES 683
 #define NUM_FEATURES 5
 #define NUM_CLASSES 3
+
+#define GPIO_TIMING_PIN 0
 
 int max_index(float *a, int n) {
   if (n <= 0) return -1;
@@ -80,6 +83,12 @@ void setup(void) {
 	// Initialize the SWO GPIO pin
 	//
 	am_bsp_pin_enable(ITM_SWO);
+	
+	//
+	// Initialise the timing output GPIO pin
+	//
+	am_hal_gpio_pin_config(GPIO_TIMING_PIN, AM_HAL_GPIO_OUTPUT)
+	am_hal_gpio_out_enable_bit_set(GPIO_TIMING_PIN);
 
 	//
 	// Enable the ITM.
@@ -117,7 +126,9 @@ void setup(void) {
 
 int main(void) { 
 	setup();
+	am_hal_gpio_out_bit_set(GPIO_TIMING_PIN);
 	test();
+	am_hal_gpio_out_bit_clear(GPIO_TIMING_PIN);
 	while(1) {
 		// Do nothing
 	}
