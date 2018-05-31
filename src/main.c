@@ -200,9 +200,9 @@ int main(void) {
 	am_util_stdio_printf("\n");
 	timing_separator();
 	#endif
-//	
-//	am_util_stdio_printf("\nTests complete\n");
-//	timing_separator();
+	
+	am_util_stdio_printf("\nTests complete\n");
+	timing_separator();
 	
 	am_bsp_debug_printf_disable();
 	while(1) {
