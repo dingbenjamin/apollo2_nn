@@ -392,29 +392,14 @@
               <FilePath>.\src\performance.c</FilePath>
             </File>
             <File>
-              <FileName>performance.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\performance.h</FilePath>
-            </File>
-            <File>
               <FileName>extraction.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\extraction\extraction.c</FilePath>
             </File>
             <File>
-              <FileName>extraction.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\extraction\extraction.h</FilePath>
-            </File>
-            <File>
               <FileName>loop.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\extraction\loop.c</FilePath>
-            </File>
-            <File>
-              <FileName>loop.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\extraction\loop.h</FilePath>
             </File>
             <File>
               <FileName>fann.c</FileName>
@@ -471,45 +456,6 @@
                   </Cads>
                 </FileArmAds>
               </FileOption>
-            </File>
-            <File>
-              <FileName>fann.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\fann\fann.h</FilePath>
-            </File>
-            <File>
-              <FileName>fann_conf.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\fann\fann_conf.h</FilePath>
-            </File>
-            <File>
-              <FileName>fann_net.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\fann\fann_net.h</FilePath>
-              <FileOption>
-                <CommonProperty>
-                  <UseCPPCompiler>2</UseCPPCompiler>
-                  <RVCTCodeConst>9</RVCTCodeConst>
-                  <RVCTZI>4</RVCTZI>
-                  <RVCTOtherData>4</RVCTOtherData>
-                  <ModuleSelection>0</ModuleSelection>
-                  <IncludeInBuild>2</IncludeInBuild>
-                  <AlwaysBuild>2</AlwaysBuild>
-                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
-                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
-                  <PublicsOnly>2</PublicsOnly>
-                  <StopOnExitCode>11</StopOnExitCode>
-                  <CustomArgument></CustomArgument>
-                  <IncludeLibraryModules></IncludeLibraryModules>
-                  <ComprImg>1</ComprImg>
-                </CommonProperty>
-                <FileArmAds/>
-              </FileOption>
-            </File>
-            <File>
-              <FileName>fann_structs.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\fann\fann_structs.h</FilePath>
             </File>
           </Files>
         </Group>
