@@ -14,13 +14,13 @@
 #include <stdlib.h>
 #include "extraction/extraction.h"
 #include "fann/fann.h"
-#include "fann/test_data.h"
 #include "apollo1.h"
 #include "am_mcu_apollo.h"
 #include "am_hal_gpio.h"
 #include "am_bsp.h"
 #include "am_util.h"
-#include "data.h"
+#include "../data/fann_data.h"
+#include "../data/feature_extraction_data.h"
 
 #define NUM_SAMPLES 683
 #define NUM_FEATURES 5

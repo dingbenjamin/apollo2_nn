@@ -511,11 +511,6 @@
               <FileType>5</FileType>
               <FilePath>.\src\fann\fann_structs.h</FilePath>
             </File>
-            <File>
-              <FileName>test_data.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\fann\test_data.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -560,6 +555,21 @@
               <FileName>libam_hal.lib</FileName>
               <FileType>4</FileType>
               <FilePath>.\sdk\apollo2\hal\keil\bin\libam_hal.lib</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>data</GroupName>
+          <Files>
+            <File>
+              <FileName>fann_data.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\data\fann_data.h</FilePath>
+            </File>
+            <File>
+              <FileName>feature_extraction_data.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\data\feature_extraction_data.h</FilePath>
             </File>
           </Files>
         </Group>
