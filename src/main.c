@@ -106,6 +106,7 @@ void test_feature_extraction(void) {
 	extractfeatures2(mtime, f);
 	am_hal_gpio_out_bit_set(GPIO_TIMING_PIN_1); // Mark timing pin 1
 	float *s = fann_run(f);
+	am_util_stdio_printf("Accuracy: %.4f%%\n", s);
 	mtime = 0;
 	am_hal_gpio_out_bit_clear(GPIO_TIMING_PIN_1); // End timing pin 1
 }
