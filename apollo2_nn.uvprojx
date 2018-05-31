@@ -562,14 +562,14 @@
           <GroupName>data</GroupName>
           <Files>
             <File>
-              <FileName>fann_data.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\data\fann_data.h</FilePath>
+              <FileName>fann_data.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\data\fann_data.c</FilePath>
             </File>
             <File>
-              <FileName>feature_extraction_data.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\data\feature_extraction_data.h</FilePath>
+              <FileName>feature_extraction_data.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\data\feature_extraction_data.c</FilePath>
             </File>
           </Files>
         </Group>
