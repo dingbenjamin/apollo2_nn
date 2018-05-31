@@ -27,8 +27,8 @@
 #define NUM_CLASSES 3
 #define TIMING_SEPARATOR_TOGGLES 1000
 
-#define GPIO_TIMING_PIN_1 20
-#define GPIO_TIMING_PIN_2 21
+#define GPIO_TIMING_PIN_1 34
+#define GPIO_TIMING_PIN_2 35
 
 #define TEST_FANN
 
@@ -154,8 +154,8 @@ void setup(void) {
 	//
 	am_hal_gpio_pin_config(GPIO_TIMING_PIN_1, AM_HAL_GPIO_OUTPUT)
 	am_hal_gpio_out_enable_bit_set(GPIO_TIMING_PIN_1);
-	am_hal_gpio_pin_config(GPIO_TIMING_PIN_2, AM_HAL_GPIO_OUTPUT)
-	am_hal_gpio_out_enable_bit_set(GPIO_TIMING_PIN_2);
+//	am_hal_gpio_pin_config(GPIO_TIMING_PIN_2, AM_HAL_GPIO_OUTPUT)
+//	am_hal_gpio_out_enable_bit_set(GPIO_TIMING_PIN_2);
 
 	//
 	// Clear the terminal and print the banner.
