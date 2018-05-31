@@ -25,7 +25,7 @@
 #define NUM_FEATURES 5
 #define NUM_CLASSES 3
 
-#define GPIO_TIMING_PIN 0
+#define GPIO_TIMING_PIN 20
 
 int max_index(float *a, int n) {
   if (n <= 0) return -1;
