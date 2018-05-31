@@ -40,7 +40,25 @@ int max_index(float *a, int n) {
   return max_i;
 }
 
-void test(void) {
+// Used to toggle a GPIO pin for external timing measurements
+// Max frequency for GPIO toggle is 3.7MHz which is approx 135ns
+// This is suitable for most microsecond scale measurements
+void time_gpio(void (*f)(), uint8_t pin_num) {
+	// Initialise the timing output GPIO pin
+	am_hal_gpio_pin_config(pin_num, AM_HAL_GPIO_OUTPUT)
+	am_hal_gpio_out_enable_bit_set(pin_num);
+	
+	// Start timing
+	am_hal_gpio_out_bit_set(pin_num);
+	
+	// Run the function
+	f();
+	
+	// End timing
+	am_hal_gpio_out_bit_clear(pin_num);
+}	
+
+void test_nn_acc(void) {
   int t;
   int corr = 0;
   float *res;
@@ -55,7 +73,18 @@ void test(void) {
 	
 	am_bsp_debug_printf_enable();
 	am_util_stdio_printf("Accuracy: %.4f%%\n", acc);
-	am_bsp_debug_printf_disable();
+}
+
+void test_nn_timing(void) {
+	int t;
+  int corr = 0;
+  float *res;
+	for (t = 0; t < NUM_SAMPLES; t++) {
+		res = fann_run(&test_data_input[t * NUM_FEATURES]);
+		if (max_index(res, NUM_CLASSES) == test_data_output[t]) {
+			++corr;
+		}
+	}
 }
 
 void setup(void) {
@@ -83,12 +112,6 @@ void setup(void) {
 	// Initialize the SWO GPIO pin
 	//
 	am_bsp_pin_enable(ITM_SWO);
-	
-	//
-	// Initialise the timing output GPIO pin
-	//
-	am_hal_gpio_pin_config(GPIO_TIMING_PIN, AM_HAL_GPIO_OUTPUT)
-	am_hal_gpio_out_enable_bit_set(GPIO_TIMING_PIN);
 
 	//
 	// Enable the ITM.
@@ -105,7 +128,7 @@ void setup(void) {
 	//
 	am_util_stdio_terminal_clear();
 	am_util_stdio_printf("apollo2_nn\n");
-	am_util_stdio_printf("\tPerforms tests of FANN library on target platform\n");\
+	am_util_stdio_printf("Performs tests of FANN library on target platform\n");\
 	
 	//
 	// We are done printing. Disable debug printf messages on ITM.
@@ -126,9 +149,16 @@ void setup(void) {
 
 int main(void) { 
 	setup();
-	am_hal_gpio_out_bit_set(GPIO_TIMING_PIN);
-	test();
-	am_hal_gpio_out_bit_clear(GPIO_TIMING_PIN);
+	am_bsp_debug_printf_enable();
+	
+	// Test classification of 683 points
+	am_util_stdio_printf("\ntest_nn_acc start\n");
+	test_nn_acc();
+	time_gpio(&test_nn_timing, GPIO_TIMING_PIN);
+	am_util_stdio_printf("See external measurement for timing");
+	am_util_stdio_printf("\ntest_nn_acc end\n");
+	
+	am_bsp_debug_printf_disable();
 	while(1) {
 		// Do nothing
 	}
