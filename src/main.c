@@ -25,7 +25,8 @@
 #define NUM_FEATURES 5
 #define NUM_CLASSES 3
 
-#define GPIO_TIMING_PIN 20
+#define GPIO_TIMING_PIN_1 20
+#define GPIO_TIMING_PIN_2 21
 
 int max_index(float *a, int n) {
   if (n <= 0) return -1;
@@ -40,34 +41,23 @@ int max_index(float *a, int n) {
   return max_i;
 }
 
-// Used to toggle a GPIO pin for external timing measurements
-// Max frequency for GPIO toggle is 3.7MHz which is approx 135ns
-// This is suitable for most microsecond scale measurements
-void time_gpio(void (*f)(), uint8_t pin_num) {
-	// Initialise the timing output GPIO pin
-	am_hal_gpio_pin_config(pin_num, AM_HAL_GPIO_OUTPUT)
-	am_hal_gpio_out_enable_bit_set(pin_num);
-	
-	// Start timing
-	am_hal_gpio_out_bit_set(pin_num);
-	
-	// Run the function
-	f();
-	
-	// End timing
-	am_hal_gpio_out_bit_clear(pin_num);
-}	
-
 void test_nn_acc(void) {
   int t;
   int corr = 0;
   float *res;
+	
+	// Start timing
+	am_hal_gpio_out_bit_set(GPIO_TIMING_PIN_1);
+	
   for (t = 0; t < NUM_SAMPLES; t++) {
     res = fann_run(&test_data_input[t * NUM_FEATURES]);
     if (max_index(res, NUM_CLASSES) == test_data_output[t]) {
       ++corr;
     }
   }
+	
+	// End Timing
+	am_hal_gpio_out_bit_clear(GPIO_TIMING_PIN_1);
 
   volatile float acc = 100.0 * corr / (float)NUM_SAMPLES;
 	
@@ -75,17 +65,45 @@ void test_nn_acc(void) {
 	am_util_stdio_printf("Accuracy: %.4f%%\n", acc);
 }
 
-void test_nn_timing(void) {
-	int t;
-  int corr = 0;
-  float *res;
-	for (t = 0; t < NUM_SAMPLES; t++) {
-		res = fann_run(&test_data_input[t * NUM_FEATURES]);
-		if (max_index(res, NUM_CLASSES) == test_data_output[t]) {
-			++corr;
-		}
-	}
+void test_feature_extraction(void) {
+  int i, t, secg, sgsr;
+  float f[8];
+  int mtime = 0;
+  while (1) {
+		// Start timing pin 1
+		am_hal_gpio_out_bit_set(GPIO_TIMING_PIN_1);
+    resetExtraction(sgsr, mtime);
+    for (t = 0; t < 3; ++t) {
+      for (i = 0; i < 1024; i = i + 3) {
+//        int i1 = data[i];
+//        int i2 = data[i + 1];
+//        int i3 = data[i + 2];
+				int i1 = 0;
+				int i2 = 0;
+				int i3 = 0;
+				// Start timing pin 2
+        am_hal_gpio_out_bit_set(GPIO_TIMING_PIN_2);
+        sgsr = smoothgsr(i3);
+        secg = smoothecg(i1, i2);
+        gsrdetection(sgsr, mtime);
+        peakdetection(secg, i1, i2, mtime);
+        ++mtime;
+				// End timing pin 2
+        am_hal_gpio_out_bit_clear(GPIO_TIMING_PIN_1);
+      }
+    }
+		// Mark timing pin 1
+    am_hal_gpio_out_bit_clear(GPIO_TIMING_PIN_1);
+    extractfeatures2(mtime, f);
+		// Mark timing pin 1
+    am_hal_gpio_out_bit_set(GPIO_TIMING_PIN_1);
+    float *s = fann_run(f);
+    mtime = 0;
+		// End timing pin 1
+    am_hal_gpio_out_bit_clear(GPIO_TIMING_PIN_1);
+  }
 }
+
 
 void setup(void) {
 	//
@@ -150,13 +168,25 @@ void setup(void) {
 int main(void) { 
 	setup();
 	am_bsp_debug_printf_enable();
+	// Initialise the timing output GPIO pin
+	// Max frequency for GPIO toggle is 3.7MHz which is approx 135ns
+	// This is suitable for most microsecond scale measurements
+	am_hal_gpio_pin_config(GPIO_TIMING_PIN_1, AM_HAL_GPIO_OUTPUT)
+	am_hal_gpio_out_enable_bit_set(GPIO_TIMING_PIN_1);
 	
 	// Test classification of 683 points
 	am_util_stdio_printf("\ntest_nn_acc start\n");
 	test_nn_acc();
-	time_gpio(&test_nn_timing, GPIO_TIMING_PIN);
 	am_util_stdio_printf("See external measurement for timing");
 	am_util_stdio_printf("\ntest_nn_acc end\n");
+	
+	am_util_stdio_printf("\n");
+	
+	// Test feature extraction of data
+	am_util_stdio_printf("\ntest_feature_extraction_timing start\n");
+	test_feature_extraction();
+	am_util_stdio_printf("See external measurement for timing");
+	am_util_stdio_printf("\ntest_feature_extraction_timing end\n");
 	
 	am_bsp_debug_printf_disable();
 	while(1) {
