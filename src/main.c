@@ -19,8 +19,6 @@
 #include "am_hal_gpio.h"
 #include "am_bsp.h"
 #include "am_util.h"
-#include "../data/fann_data.h"
-#include "../data/feature_extraction_data.h"
 
 #define NUM_SAMPLES 683
 #define NUM_FEATURES 5
@@ -31,7 +29,15 @@
 #define GPIO_TIMING_PIN_2 35
 
 #define TEST_FANN
-#define TEST_FEATURE_EXTRACTION
+//#define TEST_FEATURE_EXTRACTION
+
+#ifdef TEST_FANN
+	#include "../data/fann_data.h"
+#endif
+
+#ifdef TEST_FEATURE_EXTRACTION
+	#include "../data/feature_extraction_data.h"
+#endif
 
 void timing_separator() {
 	int i;
@@ -57,58 +63,69 @@ int max_index(float *a, int n) {
 }
 
 void test_fann(void) {
-  int t;
-  int corr = 0;
-  float *res;
-	
-	// Start timing
-	am_hal_gpio_out_bit_set(GPIO_TIMING_PIN_1);
-	
-  for (t = 0; t < NUM_SAMPLES; t++) {
-    res = fann_run(&test_data_input[t * NUM_FEATURES]);
-    if (max_index(res, NUM_CLASSES) == test_data_output[t]) {
-      ++corr;
-    }
-  }
-	
-	// End Timing
-	am_hal_gpio_out_bit_clear(GPIO_TIMING_PIN_1);
+	#ifdef TEST_FANN
+		int t;
+		int corr = 0;
+		float *res;
+		
+		// Start timing
+		am_hal_gpio_out_bit_set(GPIO_TIMING_PIN_1);
+		
+		for (t = 0; t < NUM_SAMPLES; t++) {
+			res = fann_run(&test_data_input[t * NUM_FEATURES]);
+			if (max_index(res, NUM_CLASSES) == test_data_output[t]) {
+				++corr;
+			}
+		}
+		
+		// End Timing
+		am_hal_gpio_out_bit_clear(GPIO_TIMING_PIN_1);
 
-  volatile float acc = 100.0 * corr / (float)NUM_SAMPLES;
-	
-	am_bsp_debug_printf_enable();
-	am_util_stdio_printf("Accuracy: %.4f%%\n", acc);
+		volatile float acc = 100.0 * corr / (float)NUM_SAMPLES;
+		
+		am_bsp_debug_printf_enable();
+		am_util_stdio_printf("Accuracy: %.4f%%\n", acc);
+		am_util_stdio_printf("See external measurement for timing");
+	#else
+		am_util_stdio_printf("Test skipped");
+	#endif
 }
 
-void test_feature_extraction(void) {
-  int i, t, secg, sgsr;
-  float f[8];
-  int mtime = 0;
 
-	// Start timing pin 1
-	am_hal_gpio_out_bit_set(GPIO_TIMING_PIN_1);
-	resetExtraction(sgsr, mtime);
-	for (t = 0; t < 3; ++t) {
-		for (i = 0; i < 1024; i = i + 3) {
-			int i1 = data[i];
-			int i2 = data[i + 1];
-			int i3 = data[i + 2];
-			am_hal_gpio_out_bit_set(GPIO_TIMING_PIN_2); // Start timing pin 2
-			sgsr = smoothgsr(i3);
-			secg = smoothecg(i1, i2);
-			gsrdetection(sgsr, mtime);
-			peakdetection(secg, i1, i2, mtime);
-			++mtime;
-			am_hal_gpio_out_bit_clear(GPIO_TIMING_PIN_1); // End timing pin 2
+void test_feature_extraction(void) {
+	#ifdef TEST_FEATURE_EXTRACTION
+		int i, t, secg, sgsr;
+		float f[8];
+		int mtime = 0;
+
+		// Start timing pin 1
+		am_hal_gpio_out_bit_set(GPIO_TIMING_PIN_1);
+		resetExtraction(sgsr, mtime);
+		for (t = 0; t < 3; ++t) {
+			for (i = 0; i < 1024; i = i + 3) {
+				int i1 = data[i];
+				int i2 = data[i + 1];
+				int i3 = data[i + 2];
+				am_hal_gpio_out_bit_set(GPIO_TIMING_PIN_2); // Start timing pin 2
+				sgsr = smoothgsr(i3);
+				secg = smoothecg(i1, i2);
+				gsrdetection(sgsr, mtime);
+				peakdetection(secg, i1, i2, mtime);
+				++mtime;
+				am_hal_gpio_out_bit_clear(GPIO_TIMING_PIN_1); // End timing pin 2
+			}
 		}
-	}
-	am_hal_gpio_out_bit_clear(GPIO_TIMING_PIN_1); // Mark timing pin 1
-	extractfeatures2(mtime, f);
-	am_hal_gpio_out_bit_set(GPIO_TIMING_PIN_1); // Mark timing pin 1
-	float *s = fann_run(f);
-	am_util_stdio_printf("Accuracy: %.4f%%\n", s);
-	mtime = 0;
-	am_hal_gpio_out_bit_clear(GPIO_TIMING_PIN_1); // End timing pin 1
+		am_hal_gpio_out_bit_clear(GPIO_TIMING_PIN_1); // Mark timing pin 1
+		extractfeatures2(mtime, f);
+		am_hal_gpio_out_bit_set(GPIO_TIMING_PIN_1); // Mark timing pin 1
+		float *s = fann_run(f);
+		am_util_stdio_printf("Accuracy: %.4f%%\n", s);
+		mtime = 0;
+		am_hal_gpio_out_bit_clear(GPIO_TIMING_PIN_1); // End timing pin 1
+		am_util_stdio_printf("See external measurement for timing");
+	#else
+		am_util_stdio_printf("Test skipped");
+	#endif
 }
 
 
@@ -181,26 +198,20 @@ int main(void) {
 	setup();
 	
 	// Test classification of 683 points
-	#ifdef TEST_FANN
 	am_util_stdio_printf("\nSTART: test_fann\n");
 	test_fann();
-	am_util_stdio_printf("See external measurement for timing");
 	am_util_stdio_printf("\nEND: test_fann\n");
 	
 	am_util_stdio_printf("\n");
 	timing_separator();
-	#endif
 	
 	// Test feature extraction of data
-	#ifdef TEST_FEATURE_EXTRACTION
 	am_util_stdio_printf("\nSTART: test_feature_extraction\n");
 	test_feature_extraction();
-	am_util_stdio_printf("See external measurement for timing");
 	am_util_stdio_printf("\nEND:test_feature_extraction\n");
 	
 	am_util_stdio_printf("\n");
 	timing_separator();
-	#endif
 	
 	am_util_stdio_printf("\nTests complete\n");
 	timing_separator();
