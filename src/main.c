@@ -56,7 +56,7 @@ int max_index(float *a, int n) {
   return max_i;
 }
 
-void test_nn_acc(void) {
+void test_fann(void) {
   int t;
   int corr = 0;
   float *res;
@@ -154,15 +154,15 @@ void setup(void) {
 	//
 	am_hal_gpio_pin_config(GPIO_TIMING_PIN_1, AM_HAL_GPIO_OUTPUT)
 	am_hal_gpio_out_enable_bit_set(GPIO_TIMING_PIN_1);
-//	am_hal_gpio_pin_config(GPIO_TIMING_PIN_2, AM_HAL_GPIO_OUTPUT)
-//	am_hal_gpio_out_enable_bit_set(GPIO_TIMING_PIN_2);
+	am_hal_gpio_pin_config(GPIO_TIMING_PIN_2, AM_HAL_GPIO_OUTPUT)
+	am_hal_gpio_out_enable_bit_set(GPIO_TIMING_PIN_2);
 
 	//
 	// Clear the terminal and print the banner.
 	//
 	am_util_stdio_terminal_clear();
 	am_util_stdio_printf("apollo2_nn\n");
-	am_util_stdio_printf("Performs tests of FANN library on target platform\n");\
+	am_util_stdio_printf("Performs tests of FANN library on target platform\n\n");\
 	
 	//
 	// Clear the LED.
@@ -181,10 +181,10 @@ int main(void) {
 	
 	// Test classification of 683 points
 	#ifdef TEST_FANN
-	am_util_stdio_printf("\ntest_nn_acc start\n");
-	test_nn_acc();
+	am_util_stdio_printf("\nSTART: test_fann\n");
+	test_fann();
 	am_util_stdio_printf("See external measurement for timing");
-	am_util_stdio_printf("\ntest_nn_acc end\n");
+	am_util_stdio_printf("\nEND: test_fann\n");
 	
 	am_util_stdio_printf("\n");
 	timing_separator();
@@ -192,10 +192,10 @@ int main(void) {
 	
 	// Test feature extraction of data
 	#ifdef TEST_FEATURE_EXTRACTION
-	am_util_stdio_printf("\ntest_feature_extraction_timing start\n");
+	am_util_stdio_printf("\nSTART: test_feature_extraction\n");
 	test_feature_extraction();
 	am_util_stdio_printf("See external measurement for timing");
-	am_util_stdio_printf("\ntest_feature_extraction_timing end\n");
+	am_util_stdio_printf("\nEND:test_feature_extraction\n");
 	
 	am_util_stdio_printf("\n");
 	timing_separator();
