@@ -20,6 +20,7 @@
 #include "am_hal_gpio.h"
 #include "am_bsp.h"
 #include "am_util.h"
+#include "data.h"
 
 #define NUM_SAMPLES 683
 #define NUM_FEATURES 5
@@ -75,32 +76,24 @@ void test_feature_extraction(void) {
     resetExtraction(sgsr, mtime);
     for (t = 0; t < 3; ++t) {
       for (i = 0; i < 1024; i = i + 3) {
-//        int i1 = data[i];
-//        int i2 = data[i + 1];
-//        int i3 = data[i + 2];
-				int i1 = 0;
-				int i2 = 0;
-				int i3 = 0;
-				// Start timing pin 2
-        am_hal_gpio_out_bit_set(GPIO_TIMING_PIN_2);
+        int i1 = data[i];
+        int i2 = data[i + 1];
+        int i3 = data[i + 2];
+        am_hal_gpio_out_bit_set(GPIO_TIMING_PIN_2); // Start timing pin 2
         sgsr = smoothgsr(i3);
         secg = smoothecg(i1, i2);
         gsrdetection(sgsr, mtime);
         peakdetection(secg, i1, i2, mtime);
         ++mtime;
-				// End timing pin 2
-        am_hal_gpio_out_bit_clear(GPIO_TIMING_PIN_1);
+        am_hal_gpio_out_bit_clear(GPIO_TIMING_PIN_1); // End timing pin 2
       }
     }
-		// Mark timing pin 1
-    am_hal_gpio_out_bit_clear(GPIO_TIMING_PIN_1);
+    am_hal_gpio_out_bit_clear(GPIO_TIMING_PIN_1); // Mark timing pin 1
     extractfeatures2(mtime, f);
-		// Mark timing pin 1
-    am_hal_gpio_out_bit_set(GPIO_TIMING_PIN_1);
+    am_hal_gpio_out_bit_set(GPIO_TIMING_PIN_1); // Mark timing pin 1
     float *s = fann_run(f);
     mtime = 0;
-		// End timing pin 1
-    am_hal_gpio_out_bit_clear(GPIO_TIMING_PIN_1);
+    am_hal_gpio_out_bit_clear(GPIO_TIMING_PIN_1); // End timing pin 1
   }
 }
 
