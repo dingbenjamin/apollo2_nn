@@ -25,9 +25,20 @@
 #define NUM_SAMPLES 683
 #define NUM_FEATURES 5
 #define NUM_CLASSES 3
+#define TIMING_SEPARATOR_TOGGLES 1000
 
 #define GPIO_TIMING_PIN_1 20
 #define GPIO_TIMING_PIN_2 21
+
+void timing_separator() {
+	int i;
+	for (i = 0; i < TIMING_SEPARATOR_TOGGLES; i++) {
+		am_hal_gpio_out_bit_toggle(GPIO_TIMING_PIN_1);
+		am_hal_gpio_out_bit_toggle(GPIO_TIMING_PIN_2);
+  }
+	am_hal_gpio_out_bit_clear(GPIO_TIMING_PIN_1);
+	am_hal_gpio_out_bit_clear(GPIO_TIMING_PIN_2);
+}
 
 int max_index(float *a, int n) {
   if (n <= 0) return -1;
@@ -174,12 +185,17 @@ int main(void) {
 	am_util_stdio_printf("\ntest_nn_acc end\n");
 	
 	am_util_stdio_printf("\n");
+	timing_separator();
 	
 	// Test feature extraction of data
 	am_util_stdio_printf("\ntest_feature_extraction_timing start\n");
 	test_feature_extraction();
 	am_util_stdio_printf("See external measurement for timing");
 	am_util_stdio_printf("\ntest_feature_extraction_timing end\n");
+	
+	am_util_stdio_printf("\n");
+	am_util_stdio_printf("\nTests complete\n");
+	timing_separator();
 	
 	am_bsp_debug_printf_disable();
 	while(1) {
