@@ -12,7 +12,6 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "data.h"
 #include "extraction/extraction.h"
 #include "fann/fann.h"
 #include "fann/test_data.h"
@@ -21,8 +20,8 @@
 #include "am_bsp.h"
 #include "am_util.h"
 
-#define NUM_SAMPLES 100
-#define NUM_FEATURES 8
+#define NUM_SAMPLES 683
+#define NUM_FEATURES 5
 #define NUM_CLASSES 3
 
 int max_index(float *a, int n) {
