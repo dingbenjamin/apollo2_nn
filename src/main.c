@@ -30,6 +30,8 @@
 #define GPIO_TIMING_PIN_1 20
 #define GPIO_TIMING_PIN_2 21
 
+#define TEST_FANN
+
 void timing_separator() {
 	int i;
 	for (i = 0; i < TIMING_SEPARATOR_TOGGLES; i++) {
@@ -144,6 +146,16 @@ void setup(void) {
 	// Enable debug printf messages using ITM on SWO pin
 	//
 	am_bsp_debug_printf_enable();
+	
+	//
+	// Initialise the timing output GPIO pin
+	// Max frequency for GPIO toggle is 3.7MHz which is approx 135ns
+	// This is suitable for most microsecond scale measurements
+	//
+	am_hal_gpio_pin_config(GPIO_TIMING_PIN_1, AM_HAL_GPIO_OUTPUT)
+	am_hal_gpio_out_enable_bit_set(GPIO_TIMING_PIN_1);
+	am_hal_gpio_pin_config(GPIO_TIMING_PIN_2, AM_HAL_GPIO_OUTPUT)
+	am_hal_gpio_out_enable_bit_set(GPIO_TIMING_PIN_2);
 
 	//
 	// Clear the terminal and print the banner.
@@ -151,11 +163,6 @@ void setup(void) {
 	am_util_stdio_terminal_clear();
 	am_util_stdio_printf("apollo2_nn\n");
 	am_util_stdio_printf("Performs tests of FANN library on target platform\n");\
-	
-	//
-	// We are done printing. Disable debug printf messages on ITM.
-	//
-	am_bsp_debug_printf_disable();
 	
 	//
 	// Clear the LED.
@@ -171,14 +178,9 @@ void setup(void) {
 
 int main(void) { 
 	setup();
-	am_bsp_debug_printf_enable();
-	// Initialise the timing output GPIO pin
-	// Max frequency for GPIO toggle is 3.7MHz which is approx 135ns
-	// This is suitable for most microsecond scale measurements
-	am_hal_gpio_pin_config(GPIO_TIMING_PIN_1, AM_HAL_GPIO_OUTPUT)
-	am_hal_gpio_out_enable_bit_set(GPIO_TIMING_PIN_1);
 	
 	// Test classification of 683 points
+	#ifdef TEST_FANN
 	am_util_stdio_printf("\ntest_nn_acc start\n");
 	test_nn_acc();
 	am_util_stdio_printf("See external measurement for timing");
@@ -186,16 +188,21 @@ int main(void) {
 	
 	am_util_stdio_printf("\n");
 	timing_separator();
+	#endif
 	
 	// Test feature extraction of data
+	#ifdef TEST_FEATURE_EXTRACTION
 	am_util_stdio_printf("\ntest_feature_extraction_timing start\n");
 	test_feature_extraction();
 	am_util_stdio_printf("See external measurement for timing");
 	am_util_stdio_printf("\ntest_feature_extraction_timing end\n");
 	
 	am_util_stdio_printf("\n");
-	am_util_stdio_printf("\nTests complete\n");
 	timing_separator();
+	#endif
+//	
+//	am_util_stdio_printf("\nTests complete\n");
+//	timing_separator();
 	
 	am_bsp_debug_printf_disable();
 	while(1) {
