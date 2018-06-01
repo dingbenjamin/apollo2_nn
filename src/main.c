@@ -211,7 +211,7 @@ int main(void) {
 	// Test classification of 683 points
 	am_util_stdio_printf("\nSTART: test_fann\n");
 	am_util_stdio_printf("Use full sigmoid function\n");
-	set_neuron_activation_function(FANN_SIGMOID);
+	set_neuron_activation_function(FANN_SIGMOID_SYMMETRIC);
 	test_fann();
 	am_util_stdio_printf("\nEND: test_fann\n");
 	
@@ -220,7 +220,7 @@ int main(void) {
 	
 	am_util_stdio_printf("\nSTART: test_fann\n");
 	am_util_stdio_printf("Use stepwise sigmoid function\n");
-	set_neuron_activation_function(FANN_SIGMOID_STEPWISE);
+	set_neuron_activation_function(FANN_SIGMOID_SYMMETRIC_STEPWISE);
 	test_fann();
 	am_util_stdio_printf("\nEND: test_fann\n");
 	
