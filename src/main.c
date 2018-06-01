@@ -26,6 +26,7 @@
 #define NUM_FEATURES 5
 #define NUM_CLASSES 3
 #define NUM_NEURONS 112
+#define ACTIVATION_FUNCTION FANN_SIGMOID_SYMMETRIC_STEPWISE
 #define TIMING_SEPARATOR_TOGGLES 10000
 
 #define GPIO_TIMING_PIN_1 34
@@ -210,17 +211,7 @@ int main(void) {
 	
 	// Test classification of 683 points
 	am_util_stdio_printf("\nSTART: test_fann\n");
-	am_util_stdio_printf("Use full sigmoid function\n");
-	set_neuron_activation_function(FANN_SIGMOID_SYMMETRIC);
-	test_fann();
-	am_util_stdio_printf("\nEND: test_fann\n");
-	
-	am_util_stdio_printf("\n");
-	timing_separator();
-	
-	am_util_stdio_printf("\nSTART: test_fann\n");
-	am_util_stdio_printf("Use stepwise sigmoid function\n");
-	set_neuron_activation_function(FANN_SIGMOID_SYMMETRIC_STEPWISE);
+	set_neuron_activation_function(ACTIVATION_FUNCTION);
 	test_fann();
 	am_util_stdio_printf("\nEND: test_fann\n");
 	
@@ -233,7 +224,6 @@ int main(void) {
 	am_util_stdio_printf("\nEND:test_feature_extraction\n");
 	
 	am_util_stdio_printf("\n");
-	timing_separator();
 	
 	am_util_stdio_printf("\nTests complete\n");
 	timing_separator();
