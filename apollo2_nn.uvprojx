@@ -457,6 +457,11 @@
                 </FileArmAds>
               </FileOption>
             </File>
+            <File>
+              <FileName>fann_net.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\fann\fann_net.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

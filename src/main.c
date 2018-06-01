@@ -14,6 +14,8 @@
 #include <stdlib.h>
 #include "extraction/extraction.h"
 #include "fann/fann.h"
+#include "fann/fann_structs.h"
+#include "fann/fann_net.h"
 #include "apollo1.h"
 #include "am_mcu_apollo.h"
 #include "am_hal_gpio.h"
@@ -23,6 +25,7 @@
 #define NUM_SAMPLES 683
 #define NUM_FEATURES 5
 #define NUM_CLASSES 3
+#define NUM_NEURONS 112
 #define TIMING_SEPARATOR_TOGGLES 10000
 
 #define GPIO_TIMING_PIN_1 34
@@ -47,6 +50,13 @@ void timing_separator() {
   }
 	am_hal_gpio_out_bit_clear(GPIO_TIMING_PIN_1);
 	am_hal_gpio_out_bit_clear(GPIO_TIMING_PIN_2);
+}
+
+void set_neuron_activation_function(enum fann_activationfunc_enum activation) {
+	int i;
+	for (i = 0; i < NUM_NEURONS; i++) {
+		fann_neurons[i].activation_function = activation;
+	}
 }
 
 int max_index(float *a, int n) {
@@ -127,8 +137,7 @@ void test_feature_extraction(void) {
 		am_util_stdio_printf("Test skipped");
 	#endif
 }
-
-
+	
 void setup(void) {
 	//
 	// Set the clock frequency.
