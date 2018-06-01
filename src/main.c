@@ -55,7 +55,9 @@ void timing_separator() {
 void set_neuron_activation_function(enum fann_activationfunc_enum activation) {
 	int i;
 	for (i = 0; i < NUM_NEURONS; i++) {
-		fann_neurons[i].activation_function = activation;
+		if (fann_neurons[i].activation_function != FANN_LINEAR) {
+			fann_neurons[i].activation_function = activation;
+		}
 	}
 }
 
@@ -208,6 +210,17 @@ int main(void) {
 	
 	// Test classification of 683 points
 	am_util_stdio_printf("\nSTART: test_fann\n");
+	am_util_stdio_printf("Use full sigmoid function\n");
+	set_neuron_activation_function(FANN_SIGMOID);
+	test_fann();
+	am_util_stdio_printf("\nEND: test_fann\n");
+	
+	am_util_stdio_printf("\n");
+	timing_separator();
+	
+	am_util_stdio_printf("\nSTART: test_fann\n");
+	am_util_stdio_printf("Use stepwise sigmoid function\n");
+	set_neuron_activation_function(FANN_SIGMOID_STEPWISE);
 	test_fann();
 	am_util_stdio_printf("\nEND: test_fann\n");
 	
