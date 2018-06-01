@@ -29,11 +29,11 @@
 #define ACTIVATION_FUNCTION FANN_SIGMOID_SYMMETRIC_STEPWISE
 #define TIMING_SEPARATOR_TOGGLES 10000
 
-#define GPIO_TIMING_PIN_1 34
+#define GPIO_TIMING_PIN_1 13
 #define GPIO_TIMING_PIN_2 35
 
-#define TEST_FANN
-//#define TEST_FEATURE_EXTRACTION
+//#define TEST_FANN
+#define TEST_FEATURE_EXTRACTION
 
 #ifdef TEST_FANN
 	#include "../data/fann_data.h"
@@ -125,7 +125,7 @@ void test_feature_extraction(void) {
 				gsrdetection(sgsr, mtime);
 				peakdetection(secg, i1, i2, mtime);
 				++mtime;
-				am_hal_gpio_out_bit_clear(GPIO_TIMING_PIN_1); // End timing pin 2
+				am_hal_gpio_out_bit_clear(GPIO_TIMING_PIN_2); // End timing pin 2
 			}
 		}
 		am_hal_gpio_out_bit_clear(GPIO_TIMING_PIN_1); // Mark timing pin 1
