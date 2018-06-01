@@ -68,13 +68,39 @@ fann_type *fann_run(fann_type * input)
                     neurons = neuron_values + fann_layers[layer_it - 1].first_neuron;
                 }
 
-                arm_dot_prod_f32(weights, neurons, num_connections, &neuron_sum);
+								#ifdef FANN_CMSIS
+									arm_dot_prod_f32(weights, neurons, num_connections, &neuron_sum);
+								#else
+									/* unrolled loop start */
+									i = num_connections & 3;	/* same as modulo 4 */
+									switch (i)
+									{
+										case 3:
+											neuron_sum += fann_mult(weights[2], neurons[2]);
+										case 2:
+											neuron_sum += fann_mult(weights[1], neurons[1]);
+										case 1:
+											neuron_sum += fann_mult(weights[0], neurons[0]);
+										case 0:
+											break;
+									}
+
+									for(; i != num_connections; i += 4)
+									{
+										neuron_sum +=
+											fann_mult(weights[i], neurons[i]) +
+											fann_mult(weights[i + 1], neurons[i + 1]) +
+											fann_mult(weights[i + 2], neurons[i + 2]) +
+											fann_mult(weights[i + 3], neurons[i + 3]);
+									}
+									/* unrolled loop end */
+								#endif
             }
             else
             {
                 // Not supported yet...
                 while(1) {}
-	    }
+						}
 #ifdef FIXEDFANN
             if(activation_function != last_activation_function || steepness != last_steepness)
             {
