@@ -32,11 +32,16 @@
 #define GPIO_TIMING_PIN_1 34
 #define GPIO_TIMING_PIN_2 35
 
-#define TEST_FANN
+#define TEST_STRESS
+#define TEST_EPILEPSY
 //#define TEST_FEATURE_EXTRACTION
 
-#ifdef TEST_FANN
-	#include "../data/fann_data.h"
+#ifdef TEST_STRESS
+	#include "../data/stress_data.h"
+#endif
+
+#ifdef TEST_EPILEPSY
+	#include "../data/epilepsy_data.h"
 #endif
 
 #ifdef TEST_FEATURE_EXTRACTION
@@ -75,8 +80,8 @@ int max_index(float *a, int n) {
   return max_i;
 }
 
-void test_fann(void) {
-	#ifdef TEST_FANN
+void test_stress_fann(void) {
+	#ifdef TEST_STRESS
 		int t;
 		int corr = 0;
 		float *res;
@@ -85,8 +90,8 @@ void test_fann(void) {
 		am_hal_gpio_out_bit_set(GPIO_TIMING_PIN_1);
 		
 		for (t = 0; t < NUM_SAMPLES; t++) {
-			res = fann_run(&test_data_input[t * NUM_FEATURES]);
-			if (max_index(res, NUM_CLASSES) == test_data_output[t]) {
+			res = fann_run(&test_stress_data_input[t * NUM_FEATURES]);
+			if (max_index(res, NUM_CLASSES) == test_stress_data_output[t]) {
 				++corr;
 			}
 		}
@@ -210,10 +215,10 @@ int main(void) {
 	setup();
 	
 	// Test classification of 683 points
-	am_util_stdio_printf("\nSTART: test_fann\n");
+	am_util_stdio_printf("\nSTART: test_stress_fann\n");
 	set_neuron_activation_function(ACTIVATION_FUNCTION);
-	test_fann();
-	am_util_stdio_printf("\nEND: test_fann\n");
+	test_stress_fann();
+	am_util_stdio_printf("\nEND: test_stress_fann\n");
 	
 	am_util_stdio_printf("\n");
 	timing_separator();

@@ -633,11 +633,6 @@
           </GroupOption>
           <Files>
             <File>
-              <FileName>fann_data.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\data\fann_data.c</FilePath>
-            </File>
-            <File>
               <FileName>feature_extraction_data.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\data\feature_extraction_data.c</FilePath>
@@ -646,6 +641,11 @@
               <FileName>epilepsy_data.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\data\epilepsy_data.c</FilePath>
+            </File>
+            <File>
+              <FileName>stress_data.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\data\stress_data.c</FilePath>
             </File>
           </Files>
         </Group>
