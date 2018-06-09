@@ -18,6 +18,7 @@
 	#define NUM_INPUT 5
 	#define NUM_OUTPUT 3
 	#define NUM_LAYERS 4
+	#define NUM_WEIGHTS 3003
 	#define CONNECTION_RATE 1.000000
 #endif
 
@@ -26,12 +27,13 @@
 	#define NUM_SAMPLES 100
 	#define NUM_FEATURES 178
 	#define NUM_CLASSES 2
-	#define NUM_NEURONS 356
-	#define MULTIPLIER 2
+	#define NUM_NEURONS 266
+	#define MULTIPLIER 1
 	#define DECIMAL_POINT 2
 	#define NUM_INPUT 178
 	#define NUM_OUTPUT 2
-	#define NUM_LAYERS 4
+	#define NUM_LAYERS 2
+	#define NUM_WEIGHTS 15840
 	#define CONNECTION_RATE 1.000000
 #endif
 
