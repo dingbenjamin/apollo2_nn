@@ -27,13 +27,13 @@
 	#define NUM_SAMPLES 100
 	#define NUM_FEATURES 178
 	#define NUM_CLASSES 2
-	#define NUM_NEURONS 266
-	#define MULTIPLIER 1
-	#define DECIMAL_POINT 2
+	#define NUM_NEURONS 271
+	#define MULTIPLIER 2
+	#define DECIMAL_POINT 1
 	#define NUM_INPUT 178
 	#define NUM_OUTPUT 2
-	#define NUM_LAYERS 2
-	#define NUM_WEIGHTS 15840
+	#define NUM_LAYERS 3
+	#define NUM_WEIGHTS 15930
 	#define CONNECTION_RATE 1.000000
 #endif
 
