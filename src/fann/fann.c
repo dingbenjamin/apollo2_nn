@@ -15,7 +15,7 @@
 fann_type neuron_values[NUM_NEURONS];
 
 // __attribute__((ramfunc))
-fann_type *fann_run(fann_type * input)
+fann_type *fann_run(const fann_type * input)
 {
     fann_type *neurons;
     unsigned int i, num_connections;

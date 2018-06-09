@@ -77,15 +77,6 @@ void timing_separator() {
 	am_hal_gpio_out_bit_clear(GPIO_TIMING_PIN_2);
 }
 
-void set_neuron_activation_function(enum fann_activationfunc_enum activation) {
-	int i;
-	for (i = 0; i < NUM_NEURONS; i++) {
-		if (fann_neurons[i].activation_function != FANN_LINEAR) {
-			fann_neurons[i].activation_function = activation;
-		}
-	}
-}
-
 int max_index(float *a, int n) {
   if (n <= 0) return -1;
   int i, max_i = 0;
@@ -264,7 +255,6 @@ int main(void) {
 	
 	// Test stress classification of 683 points
 	am_util_stdio_printf("\nSTART: test_stress_fann\n");
-	set_neuron_activation_function(ACTIVATION_FUNCTION);
 	test_stress_fann();
 	am_util_stdio_printf("\nEND: test_stress_fann\n");
 	
@@ -273,9 +263,11 @@ int main(void) {
 	
 	// Test epilepsy classification of 1000 points
 	am_util_stdio_printf("\nSTART: test_epilepsy_fann\n");
-	set_neuron_activation_function(ACTIVATION_FUNCTION);
 	test_epilepsy_fann();
 	am_util_stdio_printf("\nEND: test_epilepsy_fann\n");
+	
+	am_util_stdio_printf("\n");
+	timing_separator();
 	
 	// Test feature extraction of data
 	am_util_stdio_printf("\nSTART: test_feature_extraction\n");

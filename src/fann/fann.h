@@ -24,7 +24,7 @@ typedef float fann_type;
     This function appears in FANN >= 1.0.0.
 */
 // __attribute__((ramfunc))
-fann_type *fann_run(fann_type * input);
+fann_type *fann_run(const fann_type * input);
 
 
 #endif /* FANN_FANN_H_ */

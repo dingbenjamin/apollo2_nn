@@ -3,7 +3,7 @@
 
 #include "../src/fann/fann.h" 
 
-extern fann_type test_epilepsy_data_input[17800];
+const extern fann_type test_epilepsy_data_input[17800];
 
 extern const int test_epilepsy_data_output[100];
 
