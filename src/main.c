@@ -4,6 +4,18 @@
  * Author: Philipp MAYER, Michael PRITZ, Ferdinand VON HAGEN
  *
  * Modified By: Benjamin DING
+ *
+ * Usage: Define the following preprocessor macros in the build configuration
+ * 
+ * Mandatory:
+ * ARM_MATH_CM4 
+ * __FPU_PRESENT=1
+ *
+ * Optional:
+ * FANN_CMSIS
+ * TEST_STRESS or TEST_EPILEPSY
+ * TEST_FEATURE_EXTRACTION
+ *
  *******************************************************************************/
 
 #include <arm_math.h>
@@ -22,26 +34,33 @@
 #include "am_bsp.h"
 #include "am_util.h"
 
-#define NUM_SAMPLES 683
-#define NUM_FEATURES 5
-#define NUM_CLASSES 3
-#define NUM_NEURONS 112
-#define ACTIVATION_FUNCTION FANN_SIGMOID_SYMMETRIC_STEPWISE
 #define TIMING_SEPARATOR_TOGGLES 10000
 
 #define GPIO_TIMING_PIN_1 34
 #define GPIO_TIMING_PIN_2 35
 
-#define TEST_STRESS
-#define TEST_EPILEPSY
-//#define TEST_FEATURE_EXTRACTION
+#ifdef TEST_STRESS
+	#ifdef TEST_EPILEPSY
+		#error Only one of stress/epilepsy tests can be defined
+	#endif
+#endif
 
 #ifdef TEST_STRESS
 	#include "../data/stress_data.h"
+	#define NUM_SAMPLES 683
+	#define NUM_FEATURES 5
+	#define NUM_CLASSES 3
+	#define NUM_NEURONS 112
+	#define ACTIVATION_FUNCTION FANN_SIGMOID_SYMMETRIC_STEPWISE
 #endif
 
 #ifdef TEST_EPILEPSY
 	#include "../data/epilepsy_data.h"
+	#define NUM_SAMPLES 100
+	#define NUM_FEATURES 178
+	#define NUM_CLASSES 2
+	#define NUM_NEURONS 356
+	#define ACTIVATION_FUNCTION FANN_SIGMOID_SYMMETRIC_STEPWISE
 #endif
 
 #ifdef TEST_FEATURE_EXTRACTION
@@ -92,6 +111,35 @@ void test_stress_fann(void) {
 		for (t = 0; t < NUM_SAMPLES; t++) {
 			res = fann_run(&test_stress_data_input[t * NUM_FEATURES]);
 			if (max_index(res, NUM_CLASSES) == test_stress_data_output[t]) {
+				++corr;
+			}
+		}
+		
+		// End Timing
+		am_hal_gpio_out_bit_clear(GPIO_TIMING_PIN_1);
+
+		volatile float acc = 100.0 * corr / (float)NUM_SAMPLES;
+		
+		am_bsp_debug_printf_enable();
+		am_util_stdio_printf("Accuracy: %.4f%%\n", acc);
+		am_util_stdio_printf("See external measurement for timing");
+	#else
+		am_util_stdio_printf("Test skipped");
+	#endif
+}
+
+void test_epilepsy_fann(void) {
+	#ifdef TEST_EPILEPSY
+		int t;
+		int corr = 0;
+		float *res;
+		
+		// Start timing
+		am_hal_gpio_out_bit_set(GPIO_TIMING_PIN_1);
+		
+		for (t = 0; t < NUM_SAMPLES; t++) {
+			res = fann_run(&test_epilepsy_data_input[t * NUM_FEATURES]);
+			if (max_index(res, NUM_CLASSES) == test_epilepsy_data_output[t]) {
 				++corr;
 			}
 		}
@@ -214,7 +262,7 @@ void setup(void) {
 int main(void) { 
 	setup();
 	
-	// Test classification of 683 points
+	// Test stress classification of 683 points
 	am_util_stdio_printf("\nSTART: test_stress_fann\n");
 	set_neuron_activation_function(ACTIVATION_FUNCTION);
 	test_stress_fann();
@@ -222,6 +270,12 @@ int main(void) {
 	
 	am_util_stdio_printf("\n");
 	timing_separator();
+	
+	// Test epilepsy classification of 1000 points
+	am_util_stdio_printf("\nSTART: test_epilepsy_fann\n");
+	set_neuron_activation_function(ACTIVATION_FUNCTION);
+	test_epilepsy_fann();
+	am_util_stdio_printf("\nEND: test_epilepsy_fann\n");
 	
 	// Test feature extraction of data
 	am_util_stdio_printf("\nSTART: test_feature_extraction\n");
