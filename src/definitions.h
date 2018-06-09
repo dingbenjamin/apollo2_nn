@@ -9,9 +9,7 @@
 
 #ifdef TEST_STRESS
 	#include "../data/stress_data.h"
-	#define NUM_SAMPLES 683
-	#define NUM_FEATURES 5
-	#define NUM_CLASSES 3
+	#define NUM_TEST_SAMPLES 683
 	#define NUM_NEURONS 112
 	#define MULTIPLIER 2
 	#define DECIMAL_POINT 1
@@ -24,9 +22,7 @@
 
 #ifdef TEST_EPILEPSY
 	#include "../data/epilepsy_data.h"
-	#define NUM_SAMPLES 100
-	#define NUM_FEATURES 178
-	#define NUM_CLASSES 2
+	#define NUM_TEST_SAMPLES 100
 	#define NUM_NEURONS 271
 	#define MULTIPLIER 2
 	#define DECIMAL_POINT 1

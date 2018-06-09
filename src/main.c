@@ -72,9 +72,9 @@ void test_stress_fann(void) {
 		// Start timing
 		am_hal_gpio_out_bit_set(GPIO_TIMING_PIN_1);
 		
-		for (t = 0; t < NUM_SAMPLES; t++) {
-			res = fann_run(&test_stress_data_input[t * NUM_FEATURES]);
-			if (max_index(res, NUM_CLASSES) == test_stress_data_output[t]) {
+		for (t = 0; t < NUM_TEST_SAMPLES; t++) {
+			res = fann_run(&test_stress_data_input[t * NUM_INPUT]);
+			if (max_index(res, NUM_OUTPUT) == test_stress_data_output[t]) {
 				++corr;
 			}
 		}
@@ -82,7 +82,7 @@ void test_stress_fann(void) {
 		// End Timing
 		am_hal_gpio_out_bit_clear(GPIO_TIMING_PIN_1);
 
-		volatile float acc = 100.0 * corr / (float)NUM_SAMPLES;
+		volatile float acc = 100.0 * corr / (float)NUM_TEST_SAMPLES;
 		
 		am_bsp_debug_printf_enable();
 		am_util_stdio_printf("Accuracy: %.4f%%\n", acc);
@@ -101,9 +101,9 @@ void test_epilepsy_fann(void) {
 		// Start timing
 		am_hal_gpio_out_bit_set(GPIO_TIMING_PIN_1);
 		
-		for (t = 0; t < NUM_SAMPLES; t++) {
-			res = fann_run(&test_epilepsy_data_input[t * NUM_FEATURES]);
-			if (max_index(res, NUM_CLASSES) == test_epilepsy_data_output[t]) {
+		for (t = 0; t < NUM_TEST_SAMPLES; t++) {
+			res = fann_run(&test_epilepsy_data_input[t * NUM_INPUT]);
+			if (max_index(res, NUM_OUTPUT) == test_epilepsy_data_output[t]) {
 				++corr;
 			}
 		}
@@ -111,7 +111,7 @@ void test_epilepsy_fann(void) {
 		// End Timing
 		am_hal_gpio_out_bit_clear(GPIO_TIMING_PIN_1);
 
-		volatile float acc = 100.0 * corr / (float)NUM_SAMPLES;
+		volatile float acc = 100.0 * corr / (float)NUM_TEST_SAMPLES;
 		
 		am_bsp_debug_printf_enable();
 		am_util_stdio_printf("Accuracy: %.4f%%\n", acc);
