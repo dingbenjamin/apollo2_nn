@@ -22,4 +22,4 @@ extern const enum fann_nettype_enum network_type;
 	const extern fann_layer fann_layers[4];
 #endif	
 
-#endif // FANN_FANN_NET_H
+#endif // FANN_FANN_NET_H_

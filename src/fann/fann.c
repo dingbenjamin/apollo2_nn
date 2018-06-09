@@ -21,7 +21,7 @@ fann_type *fann_run(const fann_type * input)
     unsigned int i, num_connections;
     fann_type neuron_sum, *output;
     const fann_type *weights;
-    unsigned int activation_function, layer_it, neuron_it, last_neuron;
+    unsigned int activation_function, layer_it, neuron_it, first_neuron, last_neuron;
     fann_type steepness;
 
     /* store some variabels local for fast access */
@@ -42,8 +42,9 @@ fann_type *fann_run(const fann_type * input)
 
     for(layer_it = 1; layer_it != NUM_LAYERS; ++layer_it)
     {
+				first_neuron = fann_layers[layer_it].first_neuron;
         last_neuron = fann_layers[layer_it].last_neuron;
-        for(neuron_it = fann_layers[layer_it].first_neuron; neuron_it != last_neuron; ++neuron_it)
+        for(neuron_it = first_neuron; neuron_it != last_neuron; ++neuron_it)
         {
             if(fann_neurons[neuron_it].first_connection == fann_neurons[neuron_it].last_connection)
             {

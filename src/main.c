@@ -33,39 +33,12 @@
 #include "am_hal_gpio.h"
 #include "am_bsp.h"
 #include "am_util.h"
+#include "definitions.h"
 
 #define TIMING_SEPARATOR_TOGGLES 10000
 
 #define GPIO_TIMING_PIN_1 34
 #define GPIO_TIMING_PIN_2 35
-
-#ifdef TEST_STRESS
-	#ifdef TEST_EPILEPSY
-		#error Only one of stress/epilepsy tests can be defined
-	#endif
-#endif
-
-#ifdef TEST_STRESS
-	#include "../data/stress_data.h"
-	#define NUM_SAMPLES 683
-	#define NUM_FEATURES 5
-	#define NUM_CLASSES 3
-	#define NUM_NEURONS 112
-	#define ACTIVATION_FUNCTION FANN_SIGMOID_SYMMETRIC_STEPWISE
-#endif
-
-#ifdef TEST_EPILEPSY
-	#include "../data/epilepsy_data.h"
-	#define NUM_SAMPLES 100
-	#define NUM_FEATURES 178
-	#define NUM_CLASSES 2
-	#define NUM_NEURONS 356
-	#define ACTIVATION_FUNCTION FANN_SIGMOID_SYMMETRIC_STEPWISE
-#endif
-
-#ifdef TEST_FEATURE_EXTRACTION
-	#include "../data/feature_extraction_data.h"
-#endif
 
 void timing_separator() {
 	int i;

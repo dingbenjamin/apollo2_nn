@@ -1,6 +1,8 @@
 #ifndef FANN_FANN_CONF_H_
 #define FANN_FANN_CONF_H_
 
+#include "../definitions.h"
+
 #define SIGMOID_RESULTS_5 1
 #define SIGMOID_RESULTS_4 1
 #define SIGMOID_RESULTS_3 1
@@ -25,14 +27,5 @@
 #define SIGMOID_SYMMETRIC_VALUES_3 2
 #define SIGMOID_SYMMETRIC_VALUES_0 -2
 #define SIGMOID_SYMMETRIC_VALUES_1 -2
-
-#define NUM_NEURONS 112
-#define MULTIPLIER 2
-#define DECIMAL_POINT 1
-#define NUM_INPUT 5
-#define NUM_OUTPUT 3
-#define NUM_LAYERS 4
-#define CONNECTION_RATE 1.000000
-
 
 #endif // FANN_FANN_CONF_H_
