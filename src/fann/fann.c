@@ -48,12 +48,6 @@ fann_type *fann_run(const fann_type * input)
         {
             if(fann_neurons[neuron_it].first_connection == fann_neurons[neuron_it].last_connection)
             {
-								/* bias neurons */
-#ifdef FIXEDFANN
-                neuron_values[neuron_it] = MULTIPLIER;
-#else
-                neuron_values[neuron_it] = 1;
-#endif
                 continue;
             }
 
