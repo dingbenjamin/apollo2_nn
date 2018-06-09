@@ -642,6 +642,11 @@
               <FileType>1</FileType>
               <FilePath>.\data\feature_extraction_data.c</FilePath>
             </File>
+            <File>
+              <FileName>epilepsy_data.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\data\epilepsy_data.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
