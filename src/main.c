@@ -121,6 +121,35 @@ void test_epilepsy_fann(void) {
 	#endif
 }
 
+void test_emotion_fann(void) {
+	#ifdef TEST_EMOTION
+		int t;
+		int corr = 0;
+		float *res;
+		
+		// Start timing
+		am_hal_gpio_out_bit_set(GPIO_TIMING_PIN_1);
+		
+		for (t = 0; t < NUM_TEST_SAMPLES; t++) {
+			res = fann_run(&test_emotion_data_input[t * NUM_INPUT]);
+			if (max_index(res, NUM_OUTPUT) == test_emotion_data_output[t]) {
+				++corr;
+			}
+		}
+		
+		// End Timing
+		am_hal_gpio_out_bit_clear(GPIO_TIMING_PIN_1);
+
+		volatile float acc = 100.0 * corr / (float)NUM_TEST_SAMPLES;
+		
+		am_bsp_debug_printf_enable();
+		am_util_stdio_printf("Accuracy: %.4f%%\n", acc);
+		am_util_stdio_printf("See external measurement for timing");
+	#else
+		am_util_stdio_printf("Test skipped");
+	#endif
+}
+
 
 void test_feature_extraction(void) {
 	#ifdef TEST_FEATURE_EXTRACTION
