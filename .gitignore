@@ -45,3 +45,5 @@ apollo2_nn\.uvguix\.Ben
 JLinkLog\.txt
 
 fann_generation/\.ipynb_checkpoints/
+
+emotion_fann_generation/\.ipynb_checkpoints/
