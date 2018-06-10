@@ -41,7 +41,7 @@
 
 #ifdef TEST_EMOTION
 	#include "../data/emotion_data.h"
-	#define NUM_TEST_SAMPLES 227
+	#define NUM_TEST_SAMPLES 112
 	#define NUM_NEURONS 97
 	#define MULTIPLIER 2
 	#define DECIMAL_POINT 1
