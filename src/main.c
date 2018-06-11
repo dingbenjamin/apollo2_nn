@@ -261,7 +261,7 @@ int main(void) {
 	am_util_stdio_printf("\nEND: test_stress_fann\n");
 	
 	am_util_stdio_printf("\n");
-	timing_separator();
+	//timing_separator();
 	
 	// Test epilepsy classification of 100 points
 	am_util_stdio_printf("\nSTART: test_epilepsy_fann\n");
@@ -269,15 +269,16 @@ int main(void) {
 	am_util_stdio_printf("\nEND: test_epilepsy_fann\n");
 	
 	am_util_stdio_printf("\n");
-	timing_separator();
+	//timing_separator();
 	
 	// Test emotion classification of 227 points
+	
 	am_util_stdio_printf("\nSTART: test_emotion_fann\n");
 	test_emotion_fann();
 	am_util_stdio_printf("\nEND: test_emotion_fann\n");
 	
 	am_util_stdio_printf("\n");
-	timing_separator();
+	//timing_separator();
 	
 	// Test feature extraction of data
 	am_util_stdio_printf("\nSTART: test_feature_extraction\n");
@@ -287,10 +288,7 @@ int main(void) {
 	am_util_stdio_printf("\n");
 	
 	am_util_stdio_printf("\nTests complete\n");
-	timing_separator();
+	//timing_separator();
 	
 	am_bsp_debug_printf_disable();
-	while(1) {
-		// Do nothing
-	}
 }
